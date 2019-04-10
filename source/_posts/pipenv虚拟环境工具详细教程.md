@@ -3,6 +3,8 @@ title: pipenv虚拟环境工具详细教程
 date: 2019-04-11 02:25:44
 tags:
   - pipenv
+categories:
+  - Python
 ---
 pipenv是requests库作者Kenneth Reitz编写的一个用于创建和管理Python虚拟环境的工具。
 
