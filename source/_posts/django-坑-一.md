@@ -1,5 +1,5 @@
 ---
-title: django-坑(一)
+title: django天坑总结(一)
 date: 2018-10-18 22:39:13
 tags: 
 	- django
