@@ -7,7 +7,6 @@ tags:
   - 字符串匹配
 categories:
   - C++
-  - algorithm 
 ---
 ### KMP算法C++版本
 KMP算法基本思路:构造next[]减少回溯

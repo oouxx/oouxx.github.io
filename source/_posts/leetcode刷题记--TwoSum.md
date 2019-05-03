@@ -2,7 +2,7 @@
 title: leetcode刷题记--TwoSum
 date: 2018-10-22 09:23:40
 tags: [algorithm,Python]
-categories: [Python,leetcode]
+categories: [Python,algorithm]
 
 ---
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.

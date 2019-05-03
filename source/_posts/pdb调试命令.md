@@ -7,7 +7,6 @@ tags:
 
 categories:
   - Python
-  - debug
 ---
 ### instructions
 |instruction|comment|

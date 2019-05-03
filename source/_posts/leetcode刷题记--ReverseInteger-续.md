@@ -6,7 +6,7 @@ tags:
 	- algorithm
 categories: 
 	- Python
-	- leetcode
+	- algorithm
 
 ---
 ```Python

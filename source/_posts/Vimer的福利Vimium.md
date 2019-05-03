@@ -2,11 +2,11 @@
 title: Vimer的福利Vimium
 date: 2018-12-13 14:37:15
 tags:
-  - linux
-  - vim
+  - Linux
+  - VIM
 categories:
-  - linux
-  - vim
+  - Linux
+  - VIM
 ---
 ### Vimer的福利Vimium
 这是一款适合Vimer在chrome浏览器上快速搜索浏览网页的插件,让你

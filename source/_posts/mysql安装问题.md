@@ -1,11 +1,11 @@
 ---
-title: mysql安装问题
+title: MySQL安装问题
 date: 2018-10-15 08:39:21
 tags:
-  - linux
+  - Linux
   - MySQL
 categories:
-  - linux
+  - Linux
   - MySQL
 ---
 ### 运行环境

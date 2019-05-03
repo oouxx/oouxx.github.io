@@ -2,12 +2,12 @@
 title: 编译安装VIM8.0以及安装YouCompleteMe
 date: 2019-04-17 10:42:20
 tags:
-- vim
+- VIM
 - YouCompleteMe
 - 编译
 categories:
 - Linux
-- vim
+- VIM
 ---
 今天心血来潮想搞一搞VIM，然后就不停的Google......，找各种教程，遇到了各种问题麻烦（心累并快乐着）......通过这篇文章,希望能让大家的VIM折腾之路更平坦一点。
 
