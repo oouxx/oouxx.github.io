@@ -5,8 +5,7 @@ tags:
 	- Python
 	- algorithm
 categories: 
-	- Python
-	- algorithm
+- leetcode
 ---
 
 ### 解法剖析

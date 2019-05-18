@@ -5,6 +5,7 @@ tags:
 - tornadosql
 - tornado
 - Python
+- 源码解读
 categories:
 - 源码解读
 ---
@@ -91,7 +92,7 @@ class Connection(object):
     any other mode including blank (None) thereby explicitly clearing the SQL mode.
     """
     # pass params
-    # change connectt_timeout from 0 to 10
+    # change connect_timeout from 0 to 10
     def __init__(self, host, database, user=None, password=None,
                  max_idle_time=7 * 3600, connect_timeout=10,
                  time_zone="+0:00", charset = "utf8", sql_mode="TRADITIONAL", **kwargs):

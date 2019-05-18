@@ -38,7 +38,7 @@ setup(
   author = 'YOUR NAME',                   # Type in your name
   author_email = 'your.email@domain.com',      # Type in your E-Mail
   url = 'https://github.com/user/reponame',   # Provide either the link to your github or to your website
-  download_url = 'https://codeload.github.com/oouxx/reponame/tar.gz(zip)/version num',    # you should git tag your code and git push it.
+  download_url = 'https://codeload.github.com/username/reponame/tar.gz(zip)/version num',    # you should git tag your code and git push it.
   keywords = ['SOME', 'MEANINGFULL', 'KEYWORDS'],   # Keywords that define your package best
   install_requires=[
           '',

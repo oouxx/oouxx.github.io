@@ -2,7 +2,8 @@
 title: leetcode刷题记--ReverseInteger
 date: 2018-10-23 22:10:36
 tags: [algorithm,Python]
-categories: [Python,algorithm]
+categories:
+- leetcode
 
 ---
 Given a 32-bit signed integer, reverse digits of an integer
