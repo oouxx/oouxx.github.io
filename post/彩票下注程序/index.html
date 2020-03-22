@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>彩票下注程序 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="问题背景 Java实验课作业 问题描述 实现一个彩票游戏，要求允许用户输入下注的注数，每注七个不重复的号码并在1～35之间选取，最后输出要按照顺序" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="彩票下注程序" />
+<meta property="og:description" content="问题背景 Java实验课作业 问题描述 实现一个彩票游戏，要求允许用户输入下注的注数，每注七个不重复的号码并在1～35之间选取，最后输出要按照顺序" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/" />
+<meta property="article:published_time" content="2018-10-21T15:48:05+08:00" />
+<meta property="article:modified_time" content="2018-10-21T15:48:05+08:00" />
+<meta itemprop="name" content="彩票下注程序">
+<meta itemprop="description" content="问题背景 Java实验课作业 问题描述 实现一个彩票游戏，要求允许用户输入下注的注数，每注七个不重复的号码并在1～35之间选取，最后输出要按照顺序">
+<meta itemprop="datePublished" content="2018-10-21T15:48:05&#43;08:00" />
+<meta itemprop="dateModified" content="2018-10-21T15:48:05&#43;08:00" />
+<meta itemprop="wordCount" content="625">
+
+
+
+<meta itemprop="keywords" content="Java,二维数组," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="彩票下注程序"/>
+<meta name="twitter:description" content="问题背景 Java实验课作业 问题描述 实现一个彩票游戏，要求允许用户输入下注的注数，每注七个不重复的号码并在1～35之间选取，最后输出要按照顺序"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">彩票下注程序</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-10-21 </span>
+        <div class="post-category">
+            <a href="/categories/java/"> Java </a>
+            </div>
+          <span class="more-meta"> 约 625 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#问题背景">问题背景</a></li>
+        <li><a href="#问题描述">问题描述</a></li>
+        <li><a href="#问题难点">问题难点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="问题背景">问题背景</h3>
+<p>Java实验课作业</p>
+<h3 id="问题描述">问题描述</h3>
+<p>实现一个彩票游戏，要求允许用户输入下注的注数，每注七个不重复的号码并在1～35之间选取，最后输出要按照顺序输出。</p>
+<p>由于自己一个在自学Python然后突然拿到这个题目真的有点不习惯，总是忘记写**“;”**和**“{}”**,多么痛的领悟!!!写出这道题也花了不少时间。</p>
+<h3 id="问题难点">问题难点</h3>
+<p>随机数的生成，二维数组的去重，二维数组的排序</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Java" data-lang="Java"><span class="kn">package</span> <span class="nn">tyust_lab</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Scanner</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Array</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lab2</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">wager</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">get_wager</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">wager</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">set_wager</span><span class="o">(</span><span class="kt">int</span> <span class="n">wager</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">wager</span> <span class="o">=</span> <span class="n">wager</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">outPut</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;您下注的注数为：&#34;</span><span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">wager</span> <span class="o">);</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">sortedArray</span><span class="o">;</span>
+		<span class="n">sortedArray</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">7</span><span class="o">];</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">0</span><span class="o">;</span><span class="n">m</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">wager</span><span class="o">;</span> <span class="n">m</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">sortedArray</span> <span class="o">=</span> <span class="n">array</span><span class="o">[</span><span class="n">m</span><span class="o">];</span>
+			<span class="n">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">sortedArray</span><span class="o">);</span>
+			<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">n</span><span class="o">&lt;</span> <span class="n">7</span><span class="o">;</span> <span class="n">n</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">sortedArray</span><span class="o">[</span><span class="n">n</span><span class="o">]+</span> <span class="s">&#34; &#34;</span><span class="o">);</span>
+			<span class="o">}</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">bet</span><span class="o">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span><span class="o">)</span> <span class="o">{</span>
+		<span class="c1">// 产生1-35的随机整数
+</span><span class="c1"></span>		<span class="kt">int</span> <span class="n">random_num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="n">34</span><span class="o">+</span><span class="n">1</span><span class="o">);</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">m</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">m</span><span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">wager</span><span class="o">;</span> <span class="n">m</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">7</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+				<span class="c1">//如果 i==0  不对随机数进行校验
+</span><span class="c1"></span>				<span class="k">if</span> <span class="o">(</span><span class="n">i</span> <span class="o">!=</span><span class="n">0</span><span class="o">)</span> <span class="o">{</span>
+					<span class="n">out</span> <span class="o">:</span> <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+						<span class="c1">// 产生1-35的随机整数
+</span><span class="c1"></span>						<span class="n">random_num</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="n">34</span><span class="o">+</span><span class="n">1</span><span class="o">);</span>
+						<span class="c1">// 这个j要取狭义上的全局
+</span><span class="c1"></span>						<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">0</span> <span class="o">;</span>
+						<span class="k">for</span><span class="o">(</span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">;</span> <span class="n">j</span><span class="o">&gt;</span><span class="n">0</span><span class="o">;</span> <span class="n">j</span><span class="o">--)</span> <span class="o">{</span>
+							<span class="k">if</span> <span class="o">(</span><span class="n">random_num</span> <span class="o">==</span> <span class="n">array</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">1</span><span class="o">])</span>
+								<span class="c1">// 如果相等跳出这个for循环
+</span><span class="c1"></span>								<span class="k">break</span><span class="o">;</span>
+						<span class="o">}</span>
+						<span class="c1">//直到j==0 跳出while循环，说明找到第一个元素仍然没有出现重复。上面的break即使在中途跳出了循环但是j!=0所以他依然不能跳出死循环
+</span><span class="c1"></span>						<span class="k">if</span> <span class="o">(</span><span class="n">j</span><span class="o">==</span><span class="n">0</span><span class="o">)</span> <span class="k">break</span> <span class="n">out</span><span class="o">;</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+				<span class="n">array</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">random_num</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="n">outPut</span><span class="o">(</span><span class="n">array</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// 用户输入下注数
+</span><span class="c1"></span>		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&#34;尊敬的顾客你好，请输入下注的注数&#34;</span><span class="o">);</span>
+		<span class="n">Scanner</span> <span class="n">scnn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+		<span class="kt">int</span> <span class="n">zhushu</span> <span class="o">=</span> <span class="n">scnn</span><span class="o">.</span><span class="na">nextInt</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">set_wager</span><span class="o">(</span><span class="n">zhushu</span><span class="o">);</span>
+		<span class="n">scnn</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="kt">int</span><span class="o">[][]</span> <span class="n">array</span><span class="o">;</span>
+		<span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">wager</span><span class="o">][</span><span class="n">7</span><span class="o">];</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">bet</span><span class="o">(</span><span class="n">array</span><span class="o">);</span>
+
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2018-10-21
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/java/">Java</a>
+          <a href="/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/">二维数组</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-twosum/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">leetcode刷题记--TwoSum</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/json-dumps%E4%B8%AD%E7%9A%84ensure-ascii%E5%8F%82%E6%95%B0/">
+            <span class="next-text nav-default">json.dumps中的ensure_ascii参数</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

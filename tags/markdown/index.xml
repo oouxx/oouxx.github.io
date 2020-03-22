@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>markdown on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/markdown/</link>
+    <description>Recent content in markdown on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 30 Nov 2018 21:20:33 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>在vue中集成markdown</title>
+      <link>http://localhost:1313/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</link>
+      <pubDate>Fri, 30 Nov 2018 21:20:33 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</guid>
+      <description>为了在自己的vue中集成markdown真的试遍了所有的方法,终于成功了,特此发布博文记录一下. 我的失败经历 使用vue-markdown + highlightjs</description>
+    </item>
+    
+  </channel>
+</rss>

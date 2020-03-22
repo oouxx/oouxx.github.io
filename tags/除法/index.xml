@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>除法 on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E9%99%A4%E6%B3%95/</link>
+    <description>Recent content in 除法 on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 17 Apr 2019 10:44:49 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E9%99%A4%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python中的除法</title>
+      <link>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/</link>
+      <pubDate>Wed, 17 Apr 2019 10:44:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/</guid>
+      <description>“/”和“//” &amp;ldquo;/&amp;rdquo; 在python2中为传统除法，即当除数被除数都为整数时结果为舍去小数部分的整数，除数和被除数有一个为浮点数，结果为精确的浮</description>
+    </item>
+    
+  </channel>
+</rss>

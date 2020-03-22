@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>深浅拷贝 on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</link>
+    <description>Recent content in 深浅拷贝 on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 21 May 2019 04:38:01 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python中的拷贝</title>
+      <link>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D/</link>
+      <pubDate>Tue, 21 May 2019 04:38:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import copy a = [1, 2, 3, 4, [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;]] #原始对象 b = a #赋值，传对象的引用 c = copy.copy(a) #对象拷贝，浅拷贝 d = copy.deepcopy(a) #对象拷贝，深</description>
+    </item>
+    
+  </channel>
+</rss>

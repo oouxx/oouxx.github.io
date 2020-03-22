@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>闭包 on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E9%97%AD%E5%8C%85/</link>
+    <description>Recent content in 闭包 on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 21 May 2019 01:22:40 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E9%97%AD%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python闭包</title>
+      <link>http://localhost:1313/post/python%E9%97%AD%E5%8C%85/</link>
+      <pubDate>Tue, 21 May 2019 01:22:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E9%97%AD%E5%8C%85/</guid>
+      <description>闭包(closure)是函数式编程的重要的语法结构。闭包也是一种组织代码的结构，它同样提高了代码的可重复使用性。 当一个内嵌函数引用其外部作作</description>
+    </item>
+    
+  </channel>
+</rss>

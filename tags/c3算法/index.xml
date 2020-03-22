@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C3算法 on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/c3%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in C3算法 on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 19 May 2019 23:52:04 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/c3%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>多重继承和c3算法</title>
+      <link>http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sun, 19 May 2019 23:52:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/</guid>
+      <description>关于MRO 和 C3算法 有一个sina的blog介绍的很好：python多重继承MRO mro即method resolution order，主要用于在多继承时判断调</description>
+    </item>
+    
+  </channel>
+</rss>

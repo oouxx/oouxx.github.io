@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>发布自己的软件包到pypi - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="Make your code pulish-ready 首先准备好即将发布的软件包，并且保证没有任何无关的代码或者那些无关的代码在if __name__ == &#39;__main__&#39;:下，并且确保你的软件包下面有" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="发布自己的软件包到pypi" />
+<meta property="og:description" content="Make your code pulish-ready 首先准备好即将发布的软件包，并且保证没有任何无关的代码或者那些无关的代码在if __name__ == &#39;__main__&#39;:下，并且确保你的软件包下面有" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/" />
+<meta property="article:published_time" content="2019-04-24T01:48:32+08:00" />
+<meta property="article:modified_time" content="2019-04-24T01:48:32+08:00" />
+<meta itemprop="name" content="发布自己的软件包到pypi">
+<meta itemprop="description" content="Make your code pulish-ready 首先准备好即将发布的软件包，并且保证没有任何无关的代码或者那些无关的代码在if __name__ == &#39;__main__&#39;:下，并且确保你的软件包下面有">
+<meta itemprop="datePublished" content="2019-04-24T01:48:32&#43;08:00" />
+<meta itemprop="dateModified" content="2019-04-24T01:48:32&#43;08:00" />
+<meta itemprop="wordCount" content="699">
+
+
+
+<meta itemprop="keywords" content="Python," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="发布自己的软件包到pypi"/>
+<meta name="twitter:description" content="Make your code pulish-ready 首先准备好即将发布的软件包，并且保证没有任何无关的代码或者那些无关的代码在if __name__ == &#39;__main__&#39;:下，并且确保你的软件包下面有"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">发布自己的软件包到pypi</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-04-24 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+          <span class="more-meta"> 约 699 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#make-your-code-pulish-ready">Make your code pulish-ready</a></li>
+        <li><a href="#create-a-pypi-account">Create a PyPi account</a></li>
+        <li><a href="#create-the-files-pypi-needs">Create the files PyPi needs</a></li>
+        <li><a href="#create-pypirc-file-in-your-home-dir">Create <code>.pypirc</code> file in your home dir</a></li>
+        <li><a href="#upload-your-package-to-pypi">Upload your package to PyPi</a></li>
+        <li><a href="#change-your-package">Change your package</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="make-your-code-pulish-ready">Make your code pulish-ready</h3>
+<p>首先准备好即将发布的软件包，并且保证没有任何无关的代码或者那些无关的代码在<code>if __name__ == '__main__':</code>下，并且确保你的软件包下面有<code>__init__.py</code>文件</p>
+<h3 id="create-a-pypi-account">Create a PyPi account</h3>
+<p>在PyPi官网注册用户即可</p>
+<h3 id="create-the-files-pypi-needs">Create the files PyPi needs</h3>
+<p>PyPi 需要三个文件：</p>
+<ul>
+<li>setup.py</li>
+<li>setup.cfg</li>
+<li>LICENSE.txt</li>
+<li>README.md(可选但是强烈推荐)</li>
+</ul>
+<h4 id="setuppy">setup.py</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python">
+<span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="n">setup</span><span class="p">(</span>
+  <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;YOURPACKAGENAME&#39;</span><span class="p">,</span>         <span class="c1"># How you named your package folder</span>
+  <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;YOURPACKAGENAME&#39;</span><span class="p">],</span>   <span class="c1"># Chose the same as &#34;name&#34;</span>
+  <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span>      <span class="c1"># Start with a small number and increase it with every change you make</span>
+  <span class="n">license</span><span class="o">=</span><span class="s1">&#39;MIT&#39;</span><span class="p">,</span>        <span class="c1"># Chose a license from here: https://help.github.com/articles/licensing-a-repository</span>
+  <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;TYPE YOUR DESCRIPTION HERE&#39;</span><span class="p">,</span>   <span class="c1"># Give a short description about your library</span>
+  <span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;YOUR NAME&#39;</span><span class="p">,</span>                   <span class="c1"># Type in your name</span>
+  <span class="n">author_email</span> <span class="o">=</span> <span class="s1">&#39;your.email@domain.com&#39;</span><span class="p">,</span>      <span class="c1"># Type in your E-Mail</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/user/reponame&#39;</span><span class="p">,</span>   <span class="c1"># Provide either the link to your github or to your website</span>
+  <span class="n">download_url</span> <span class="o">=</span> <span class="s1">&#39;https://codeload.github.com/username/reponame/tar.gz(zip)/version num&#39;</span><span class="p">,</span>    <span class="c1"># you should git tag your code and git push it.</span>
+  <span class="n">keywords</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SOME&#39;</span><span class="p">,</span> <span class="s1">&#39;MEANINGFULL&#39;</span><span class="p">,</span> <span class="s1">&#39;KEYWORDS&#39;</span><span class="p">],</span>   <span class="c1"># Keywords that define your package best</span>
+  <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+          <span class="s1">&#39;&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;&#39;</span>
+      <span class="p">],</span>
+  <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
+    <span class="s1">&#39;Development Status :: 3 - Alpha&#39;</span><span class="p">,</span>      <span class="c1"># Chose either &#34;3 - Alpha&#34;, &#34;4 - Beta&#34; or &#34;5 - Production/Stable&#34; as the current state of your package</span>
+    <span class="s1">&#39;Intended Audience :: Developers&#39;</span><span class="p">,</span>      <span class="c1"># Define that your audience are developers</span>
+    <span class="s1">&#39;Topic :: Software Development :: Build Tools&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;License :: OSI Approved :: MIT License&#39;</span><span class="p">,</span>   <span class="c1"># Again, pick a license</span>
+    <span class="s1">&#39;Programming Language :: Python :: 3&#39;</span><span class="p">,</span>      <span class="c1">#Specify which pyhton versions that you want to support</span>
+    <span class="s1">&#39;Programming Language :: Python :: 3.4&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Programming Language :: Python :: 3.5&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Programming Language :: Python :: 3.6&#39;</span><span class="p">,</span>
+  <span class="p">],</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="setupcfg">setup.cfg</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># Inside of setup.cfg</span>
+<span class="k">[metadata]</span>
+<span class="na">description-file</span> <span class="o">=</span> <span class="s">README.md</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="licensetxt">LICENSE.txt</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-txt" data-lang="txt">MIT License
+Copyright (c) 2019 YOUR NAME
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &#34;Software&#34;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="create-pypirc-file-in-your-home-dir">Create <code>.pypirc</code> file in your home dir</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[distutils]</span>
+<span class="na">index-servers</span><span class="o">=</span><span class="s">pypi</span>
+
+<span class="k">[pypi]</span>
+<span class="na">repository</span><span class="o">=</span> <span class="s">https://upload.pypi.org/legacy/</span>
+<span class="na">username</span><span class="o">=</span><span class="s">your pypi username</span>
+<span class="na">password</span><span class="o">=</span><span class="s">yout pypi password</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="upload-your-package-to-pypi">Upload your package to PyPi</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> your_package_path
+python setup.py sdist
+pip install twine <span class="c1"># tool to upload your code</span>
+twine upload dist/*
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="change-your-package">Change your package</h3>
+<p>一旦你改变你的代码你可以用下面命令更新你的软件包,不过在那之前记得至少修改setup.py里面的版本号和下载链接</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">python setup.py sdist
+twine upload dist/*
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-04-24
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">Python</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">tornadosql源码解读</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/epoll%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">
+            <span class="next-text nav-default">epoll性能分析</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

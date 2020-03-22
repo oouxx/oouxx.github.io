@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>tornado的XSRF防护 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="XSRF XSRF（Cross-site request forgery，跨站请求伪造），也被简写为 CSRF，发音为”sea surf”，这是一个常见的安全漏洞（这里" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="tornado的XSRF防护" />
+<meta property="og:description" content="XSRF XSRF（Cross-site request forgery，跨站请求伪造），也被简写为 CSRF，发音为”sea surf”，这是一个常见的安全漏洞（这里" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/" />
+<meta property="article:published_time" content="2019-05-08T07:02:22+08:00" />
+<meta property="article:modified_time" content="2019-05-08T07:02:22+08:00" />
+<meta itemprop="name" content="tornado的XSRF防护">
+<meta itemprop="description" content="XSRF XSRF（Cross-site request forgery，跨站请求伪造），也被简写为 CSRF，发音为”sea surf”，这是一个常见的安全漏洞（这里">
+<meta itemprop="datePublished" content="2019-05-08T07:02:22&#43;08:00" />
+<meta itemprop="dateModified" content="2019-05-08T07:02:22&#43;08:00" />
+<meta itemprop="wordCount" content="1391">
+
+
+
+<meta itemprop="keywords" content="tornado,XSRF,源码解读," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="tornado的XSRF防护"/>
+<meta name="twitter:description" content="XSRF XSRF（Cross-site request forgery，跨站请求伪造），也被简写为 CSRF，发音为”sea surf”，这是一个常见的安全漏洞（这里"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">tornado的XSRF防护</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"> 源码解读 </a>
+            </div>
+          <span class="more-meta"> 约 1391 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h4 id="xsrf">XSRF</h4>
+<p><code>XSRF</code>（Cross-site request forgery，跨站请求伪造），也被简写为 CSRF，发音为”sea surf”，这是一个常见的安全漏洞（这里有一篇写的不错的文章《浅谈CSRF攻击方式》，有兴趣的可以简单了解下）。通常 Synchronizer token pattern 是一种常见的解决方案，该方案利用了第三方站点无法访问 cookie 的限制，为每个客户端设置一个不同的 token，并将其存储在 cookie 中。当用户发起有副作用的 HTTP 请求时，则必须携带一个包含该 token 的参数（也可以通过 Http Header 传递），服务端将对存储在 cookie 和请求参数中的 token 进行比较，以防止潜在的跨站请求伪造。</p>
+<h4 id="生成-xsrf_token">生成 xsrf_token</h4>
+<p>tornado.web.RequestHandler 中与生成跨站请求伪造 token 直接相关的是 <code>xsrf_token</code> 属性和 <code>xsrf_form_html</code> 方法。</p>
+<p>xsrf_token 属性在首次访问时会为客户端设置一个名为 _xsrf 的 cookie，其值变为前面所说的 token。token 有两个版本，版本号分别为 1 和 2，若没有在应用中设置 xsrf_cookie_version 参数则默认使用版本 2。版本 2 为每次请求都生成一个随机的掩码，相比较版本 1 而言安全性大大增强。</p>
+<p><code>xsrf_form_html</code> 就是返回一个隐藏的 HTML &lt; input/&gt; 元素，用于包含在页面的 Form 元素中以便在 POST 请求时将 token 发送给服务端验证。</p>
+<p>详细代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="nd">@property</span>
+<span class="k">def</span> <span class="nf">xsrf_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&#34;_xsrf_token&#34;</span><span class="p">):</span>
+        <span class="n">version</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_xsrf_token</span><span class="p">()</span>
+        <span class="n">output_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;xsrf_cookie_version&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">output_version</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xsrf_token</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">b2a_hex</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">output_version</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_xsrf_token</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;|&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="sa">b</span><span class="s2">&#34;2&#34;</span><span class="p">,</span>
+                <span class="n">binascii</span><span class="o">.</span><span class="n">b2a_hex</span><span class="p">(</span><span class="n">mask</span><span class="p">),</span>
+                <span class="n">binascii</span><span class="o">.</span><span class="n">b2a_hex</span><span class="p">(</span><span class="n">_websocket_mask</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">token</span><span class="p">)),</span>
+                <span class="n">utf8</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)))])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;unknown xsrf cookie version </span><span class="si">%d</span><span class="s2">&#34;</span><span class="p">,</span>
+                             <span class="n">output_version</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">expires_days</span> <span class="o">=</span> <span class="mi">30</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_user</span> <span class="k">else</span> <span class="bp">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_cookie</span><span class="p">(</span><span class="s2">&#34;_xsrf&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xsrf_token</span><span class="p">,</span>
+                            <span class="n">expires_days</span><span class="o">=</span><span class="n">expires_days</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_xsrf_token</span>
+
+<span class="k">def</span> <span class="nf">xsrf_form_html</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;input type=&#34;hidden&#34; name=&#34;_xsrf&#34; value=&#34;&#39;</span> <span class="o">+</span> \
+        <span class="n">escape</span><span class="o">.</span><span class="n">xhtml_escape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xsrf_token</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&#34;/&gt;&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上述两个方法关联的另外几个方法是 <code>_get_raw_xsrf_token</code> 和 <code>_decode_xsrf_token</code>。首次访问 _get_raw_xsrf_token 方法时，将尝试为当前用户请求生成 token（若已经生成，则直接从 cookie “_xsrf” 中获取），并赋值给 handler 的 <code>_raw_xsrf_token</code> 字段。_decode_xsrf_token 方法将 token 解析为 (version, token, timestamp) 元组返回（兼容版本 1 ，版本 1 中没有 version 和 timestamp 字段）。代码很简单，如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">_get_raw_xsrf_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_raw_xsrf_token&#39;</span><span class="p">):</span>
+        <span class="n">cookie</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cookie</span><span class="p">(</span><span class="s2">&#34;_xsrf&#34;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cookie</span><span class="p">:</span>
+            <span class="n">version</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decode_xsrf_token</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">version</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw_xsrf_token</span> <span class="o">=</span> <span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_xsrf_token</span>
+
+<span class="k">def</span> <span class="nf">_decode_xsrf_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookie</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">_signed_value_version_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">cookie</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">masked_token</span><span class="p">,</span> <span class="n">timestamp</span> <span class="o">=</span> <span class="n">cookie</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;|&#34;</span><span class="p">)</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">a2b_hex</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">mask</span><span class="p">))</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">_websocket_mask</span><span class="p">(</span>
+                <span class="n">mask</span><span class="p">,</span> <span class="n">binascii</span><span class="o">.</span><span class="n">a2b_hex</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">masked_token</span><span class="p">)))</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">version</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">timestamp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Treat unknown versions as not present instead of failing.</span>
+            <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">binascii</span><span class="o">.</span><span class="n">a2b_hex</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">cookie</span><span class="p">))</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">binascii</span><span class="o">.</span><span class="n">Error</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
+        <span class="c1"># We don&#39;t have a usable timestamp in older versions.</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="检查-xsrf_token">检查 xsrf_token</h4>
+<p>对 xsrf_token 的检查在 <code>_execute</code> 方法中委托 <code>check_xsrf_cookie</code> 方法进行，代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">async</span> <span class="k">def</span> <span class="nf">_execute</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">transforms</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="s2">&#34;OutputTransform&#34;</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s2">&#34;&#34;&#34;Executes this request with the given output transforms.&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SUPPORTED_METHODS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="mi">405</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_args</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_argument</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decode_argument</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">k</span><span class="p">))</span> <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="c1"># If XSRF cookies are turned on, reject form submissions without</span>
+            <span class="c1"># the proper cookie</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span>
+                <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;HEAD&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;OPTIONS&#34;</span><span class="p">,</span>
+            <span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;xsrf_cookies&#34;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">check_xsrf_cookie</span><span class="p">()</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">result</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepared_future</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="c1"># Tell the Application we&#39;ve finished with prepare()</span>
+                <span class="c1"># and are ready for the body to arrive.</span>
+                <span class="n">future_set_result_unless_cancelled</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prepared_future</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">:</span>
+                <span class="k">return</span>
+
+            <span class="k">if</span> <span class="n">_has_stream_request_body</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+                <span class="c1"># In streaming mode request.body is a Future that signals</span>
+                <span class="c1"># the body has been completely received.  The Future has no</span>
+                <span class="c1"># result; the data has been passed to self.data_received</span>
+                <span class="c1"># instead.</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">_body_future</span>
+                <span class="k">except</span> <span class="n">iostream</span><span class="o">.</span><span class="n">StreamClosedError</span><span class="p">:</span>
+                    <span class="k">return</span>
+
+            <span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">path_args</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">path_kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">await</span> <span class="n">result</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_finish</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_finished</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request_exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="n">app_log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;Exception in exception handler&#34;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="c1"># Unset result to avoid circular references</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepared_future</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepared_future</span><span class="o">.</span><span class="n">done</span><span class="p">():</span>
+                <span class="c1"># In case we failed before setting _prepared_future, do it</span>
+                <span class="c1"># now (to unblock the HTTP server).  Note that this is not</span>
+                <span class="c1"># in a finally block to avoid GC issues prior to Python 3.4.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_prepared_future</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_xsrf_cookie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_argument</span><span class="p">(</span><span class="s2">&#34;_xsrf&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;X-Xsrftoken&#34;</span><span class="p">)</span> <span class="ow">or</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;X-Csrftoken&#34;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">token</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="s2">&#34;&#39;_xsrf&#39; argument missing from POST&#34;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decode_xsrf_token</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">expected_token</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_raw_xsrf_token</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_time_independent_equals</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">token</span><span class="p">),</span> <span class="n">utf8</span><span class="p">(</span><span class="n">expected_token</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">HTTPError</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="s2">&#34;XSRF cookie does not match POST argument&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>check_xsrf_cookie</code> 方法代码显示与 cookie 中的 token 进行比较的 token 来源于请求参数 _xsrf 或者 HTTP 头域（<code>X-Xsrftoken</code> 或者 <code>X-Csrftoken</code>）。目前仅比较 token 值，对其中的 timestamp 和 version 字段不做比较验证。</p>
+<p>由上可见，xsrf cookies 的生成仅与是否访问 xsrf_token 属性相关，要进行验证则需要为应用设置 xsrf_cookies 为 True。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-08
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/tornado/">tornado</a>
+          <a href="/tags/xsrf/">XSRF</a>
+          <a href="/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">源码解读</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">tornado.web.RequestHandler异常处理</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/tornado%E5%AE%89%E5%85%A8cookie/">
+            <span class="next-text nav-default">tornado安全cookie</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

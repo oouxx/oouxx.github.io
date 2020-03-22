@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on wxx&#39;s blog</title>
+    <link>http://localhost:1313/categories/python/</link>
+    <description>Recent content in Python on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 21 May 2019 04:38:01 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python中的拷贝</title>
+      <link>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D/</link>
+      <pubDate>Tue, 21 May 2019 04:38:01 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 import copy a = [1, 2, 3, 4, [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;]] #原始对象 b = a #赋值，传对象的引用 c = copy.copy(a) #对象拷贝，浅拷贝 d = copy.deepcopy(a) #对象拷贝，深</description>
+    </item>
+    
+    <item>
+      <title>Python闭包</title>
+      <link>http://localhost:1313/post/python%E9%97%AD%E5%8C%85/</link>
+      <pubDate>Tue, 21 May 2019 01:22:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E9%97%AD%E5%8C%85/</guid>
+      <description>闭包(closure)是函数式编程的重要的语法结构。闭包也是一种组织代码的结构，它同样提高了代码的可重复使用性。 当一个内嵌函数引用其外部作作</description>
+    </item>
+    
+    <item>
+      <title>多重继承和c3算法</title>
+      <link>http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sun, 19 May 2019 23:52:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/</guid>
+      <description>关于MRO 和 C3算法 有一个sina的blog介绍的很好：python多重继承MRO mro即method resolution order，主要用于在多继承时判断调</description>
+    </item>
+    
+    <item>
+      <title>面向切面编程和装饰器</title>
+      <link>http://localhost:1313/post/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Sun, 19 May 2019 01:18:40 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</guid>
+      <description>今天来讨论一下装饰器。装饰器是一个很著名的设计模式，经常被用于有切面需求的场景，较为经典的有插入日志、性能测试、事务处理等。装饰器是解决这类</description>
+    </item>
+    
+    <item>
+      <title>生成器和迭代器</title>
+      <link>http://localhost:1313/post/%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+      <pubDate>Sat, 18 May 2019 19:02:54 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+      <description>To understand what yield does, you must understand what generators are. And before you can understand generators, you must understand iterables. Iterables When you create a list, you can read its items one by one. Reading its items one by one is called iteration: 1 2 3 4 5 6 &amp;gt;&amp;gt;&amp;gt; mylist = [1, 2, 3] &amp;gt;&amp;gt;&amp;gt; for i in mylist: ... print(i) 1 2 3 mylist is an iterable.</description>
+    </item>
+    
+    <item>
+      <title>Python中的单下划线和双下划线</title>
+      <link>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E5%92%8C%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF/</link>
+      <pubDate>Sat, 18 May 2019 18:36:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E5%92%8C%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF/</guid>
+      <description>Python中单下划线和双下划线 1 2 3 4 5 6 7 8 9 10 11 12 13 14 &amp;gt;&amp;gt;&amp;gt; class MyClass(): ... def __init__(self): ... self.__superprivate = &amp;#34;Hello&amp;#34; ... self._semiprivate = &amp;#34;, world!&amp;#34; ... &amp;gt;&amp;gt;&amp;gt; mc = MyClass() &amp;gt;&amp;gt;&amp;gt; print mc.__superprivate Traceback (most recent call last): File &amp;#34;&amp;lt;stdin&amp;gt;&amp;#34;, line 1, in &amp;lt;module&amp;gt; AttributeError: myClass instance has no attribute</description>
+    </item>
+    
+    <item>
+      <title>静态方法和类方法</title>
+      <link>http://localhost:1313/post/%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Sat, 18 May 2019 18:02:28 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95/</guid>
+      <description>@staticmethod和@classmethod Python其实有3个方法,即静态方法(staticmethod),类方法(classm</description>
+    </item>
+    
+    <item>
+      <title>Python中的参数传递</title>
+      <link>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</link>
+      <pubDate>Fri, 17 May 2019 23:47:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</guid>
+      <description>Python的函数参数传递 先看下面两段代码 1 2 3 4 5 6 7 8 9 10 11 12 13 # List - a mutable type def try_to_change_list_contents(the_list): print(&amp;#39;got&amp;#39;, the_list) the_list.append(&amp;#39;four&amp;#39;) print(&amp;#39;changed:&amp;#39;, the_list) the_list = [&amp;#39;one&amp;#39;, &amp;#39;two&amp;#39;, &amp;#39;three&amp;#39;, &amp;#39;four&amp;#39;, &amp;#39;five&amp;#39;] print(&amp;#39;changed:&amp;#39;, the_list) outer_list = [&amp;#39;one&amp;#39;, &amp;#39;two&amp;#39;, &amp;#39;three&amp;#39;] if __name__ == &amp;#39;__main__&amp;#39;: print(&amp;#39;before, outer_list=&amp;#39;, outer_list) try_to_change_list_contents(outer_list) print(&amp;#39;after,</description>
+    </item>
+    
+    <item>
+      <title>Python异步IO之协程</title>
+      <link>http://localhost:1313/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</link>
+      <pubDate>Sat, 04 May 2019 06:04:04 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</guid>
+      <description>协程 协程，又称微线程，纤程。英文名Coroutine。 协程的概念很早就提出来了，但直到最近几年才在某些语言（如Lua）中得到广泛应用。 子程序</description>
+    </item>
+    
+    <item>
+      <title>发布自己的软件包到pypi</title>
+      <link>http://localhost:1313/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/</link>
+      <pubDate>Wed, 24 Apr 2019 01:48:32 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/</guid>
+      <description>Make your code pulish-ready 首先准备好即将发布的软件包，并且保证没有任何无关的代码或者那些无关的代码在if __name__ == &#39;__main__&#39;:下，并且确保你的软件包下面有</description>
+    </item>
+    
+    <item>
+      <title>Python中的除法</title>
+      <link>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/</link>
+      <pubDate>Wed, 17 Apr 2019 10:44:49 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/</guid>
+      <description>“/”和“//” &amp;ldquo;/&amp;rdquo; 在python2中为传统除法，即当除数被除数都为整数时结果为舍去小数部分的整数，除数和被除数有一个为浮点数，结果为精确的浮</description>
+    </item>
+    
+    <item>
+      <title>pipenv虚拟环境工具详细教程</title>
+      <link>http://localhost:1313/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Thu, 11 Apr 2019 02:25:44 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</guid>
+      <description>pipenv是requests库作者Kenneth Reitz编写的一个用于创建和管理Python虚拟环境的工具。 Pipenv是Python官</description>
+    </item>
+    
+    <item>
+      <title>django中URLConf的设计哲学</title>
+      <link>http://localhost:1313/post/django%E4%B8%ADurlconf%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/</link>
+      <pubDate>Wed, 12 Dec 2018 12:47:56 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/django%E4%B8%ADurlconf%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/</guid>
+      <description>django中URLConf的设计哲学 一个干净的,优雅的URL方案是一个高质量Web应用程序的重要细节,django鼓励开发者使用漂亮的UR</description>
+    </item>
+    
+    <item>
+      <title>pdb调试命令</title>
+      <link>http://localhost:1313/post/pdb%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Sun, 02 Dec 2018 17:10:13 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/pdb%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4/</guid>
+      <description>instructions instruction comment break/b 设置断点 continue/c 继续执行程序 list/l 查看当前行附近代码段 step/s 进入函数 return/r 执行代码直到当前函数返回 exit/q 中止并退出 next/n 执行下一行 pp 打印变量值 help 帮助 how can i use it</description>
+    </item>
+    
+    <item>
+      <title>Python的Bunch模式</title>
+      <link>http://localhost:1313/post/python%E7%9A%84bunch%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 30 Oct 2018 21:41:57 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/python%E7%9A%84bunch%E6%A8%A1%E5%BC%8F/</guid>
+      <description>Python的Bunch模式 今天在看Python algorithm，看到了这个东西，感觉会很有用，赶快拿起vim码起字来分享给大家。我也粗略</description>
+    </item>
+    
+    <item>
+      <title>django天坑总结(一)</title>
+      <link>http://localhost:1313/post/django%E5%A4%A9%E5%9D%91%E6%80%BB%E7%BB%93%E4%B8%80/</link>
+      <pubDate>Thu, 18 Oct 2018 22:39:13 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/django%E5%A4%A9%E5%9D%91%E6%80%BB%E7%BB%93%E4%B8%80/</guid>
+      <description>user表上的外键要允许设置为空 最近一段时间一直在学Python的一个重量级Web框架django，接下来的几篇博文中会总结一下我遇到的坑。</description>
+    </item>
+    
+  </channel>
+</rss>

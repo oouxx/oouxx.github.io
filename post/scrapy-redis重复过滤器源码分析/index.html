@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>scrapy-redis重复过滤器源码分析 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="scrapy时Python界非常著名的爬虫框架,但是一遇到分布式应用的话就会捉襟见肘了,scrapy-redis就是为了解决这一痛点诞生的," /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/scrapy-redis%E9%87%8D%E5%A4%8D%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="scrapy-redis重复过滤器源码分析" />
+<meta property="og:description" content="scrapy时Python界非常著名的爬虫框架,但是一遇到分布式应用的话就会捉襟见肘了,scrapy-redis就是为了解决这一痛点诞生的," />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/scrapy-redis%E9%87%8D%E5%A4%8D%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" />
+<meta property="article:published_time" content="2019-10-31T09:36:55+08:00" />
+<meta property="article:modified_time" content="2019-10-31T09:36:55+08:00" />
+<meta itemprop="name" content="scrapy-redis重复过滤器源码分析">
+<meta itemprop="description" content="scrapy时Python界非常著名的爬虫框架,但是一遇到分布式应用的话就会捉襟见肘了,scrapy-redis就是为了解决这一痛点诞生的,">
+<meta itemprop="datePublished" content="2019-10-31T09:36:55&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-31T09:36:55&#43;08:00" />
+<meta itemprop="wordCount" content="1264">
+
+
+
+<meta itemprop="keywords" content="python,爬虫," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="scrapy-redis重复过滤器源码分析"/>
+<meta name="twitter:description" content="scrapy时Python界非常著名的爬虫框架,但是一遇到分布式应用的话就会捉襟见肘了,scrapy-redis就是为了解决这一痛点诞生的,"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">scrapy-redis重复过滤器源码分析</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-31 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%9D%82%E8%B0%88/"> 杂谈 </a>
+            </div>
+          <span class="more-meta"> 约 1264 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#scrapy-redis自带的过滤器">scrapy-redis自带的过滤器</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>scrapy时Python界非常著名的爬虫框架,但是一遇到分布式应用的话就会捉襟见肘了,scrapy-redis就是为了解决这一痛点诞生的,他把<code>start_urls</code>从中剥离出来,改为从redis中读取,多个应用读取同一个redis,从而实现了分布式爬虫.</p>
+<p><img src="/images/scrapy/scrapy-redis-arc.png" alt="scrapy-redis-arc"></p>
+<p>本篇博客暂时不说scrapy-redis如何做到分布式的, 先来看一下这个框架时如何做到url去重的,源码在下面</p>
+<h3 id="scrapy-redis自带的过滤器">scrapy-redis自带的过滤器</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># TODO: Rename class to RedisDupeFilter.</span>
+<span class="k">class</span> <span class="nc">RFPDupeFilter</span><span class="p">(</span><span class="n">BaseDupeFilter</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Redis-based request duplicates filter.
+</span><span class="s2">
+</span><span class="s2">    This class can also be used with default Scrapy&#39;s scheduler.
+</span><span class="s2">
+</span><span class="s2">    &#34;&#34;&#34;</span>
+
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Initialize the duplicates filter.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        server : redis.StrictRedis
+</span><span class="s2">            The redis server instance.
+</span><span class="s2">        key : str
+</span><span class="s2">            Redis key Where to store fingerprints.
+</span><span class="s2">        debug : bool, optional
+</span><span class="s2">            Whether to log filtered requests.
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logdupes</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_settings</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Returns an instance from given settings.
+</span><span class="s2">
+</span><span class="s2">        This uses by default the key ``dupefilter:&lt;timestamp&gt;``. When using the
+</span><span class="s2">        ``scrapy_redis.scheduler.Scheduler`` class, this method is not used as
+</span><span class="s2">        it needs to pass the spider name in the key.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        settings : scrapy.settings.Settings
+</span><span class="s2">
+</span><span class="s2">        Returns
+</span><span class="s2">        -------
+</span><span class="s2">        RFPDupeFilter
+</span><span class="s2">            A RFPDupeFilter instance.
+</span><span class="s2">
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">server</span> <span class="o">=</span> <span class="n">get_redis_from_settings</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+        <span class="c1"># XXX: This creates one-time key. needed to support to use this</span>
+        <span class="c1"># class as standalone dupefilter with scrapy&#39;s default scheduler</span>
+        <span class="c1"># if scrapy passes spider on open() method this wouldn&#39;t be needed</span>
+        <span class="c1"># TODO: Use SCRAPY_JOB env as default and fallback to timestamp.</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">DUPEFILTER_KEY</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())}</span>
+        <span class="n">debug</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">getbool</span><span class="p">(</span><span class="s1">&#39;DUPEFILTER_DEBUG&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_crawler</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">crawler</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Returns instance from crawler.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        crawler : scrapy.crawler.Crawler
+</span><span class="s2">
+</span><span class="s2">        Returns
+</span><span class="s2">        -------
+</span><span class="s2">        RFPDupeFilter
+</span><span class="s2">            Instance of RFPDupeFilter.
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_settings</span><span class="p">(</span><span class="n">crawler</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">request_seen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Returns True if request was already seen.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        request : scrapy.http.Request
+</span><span class="s2">
+</span><span class="s2">        Returns
+</span><span class="s2">        -------
+</span><span class="s2">        bool
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_fingerprint</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="c1"># This returns the number of values added, zero if already exists.</span>
+        <span class="n">added</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">sadd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">added</span> <span class="o">==</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">request_fingerprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Returns a fingerprint for a given request.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        request : scrapy.http.Request
+</span><span class="s2">
+</span><span class="s2">        Returns
+</span><span class="s2">        -------
+</span><span class="s2">        str
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="n">request_fingerprint</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Delete data on close. Called by Scrapy&#39;s scheduler.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        reason : str, optional
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Clears fingerprints data.&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Logs given request.
+</span><span class="s2">
+</span><span class="s2">        Parameters
+</span><span class="s2">        ----------
+</span><span class="s2">        request : scrapy.http.Request
+</span><span class="s2">        spider : scrapy.spiders.Spider
+</span><span class="s2">
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&#34;Filtered duplicate request: </span><span class="si">%(request)s</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="p">},</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;spider&#39;</span><span class="p">:</span> <span class="n">spider</span><span class="p">})</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">logdupes</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&#34;Filtered duplicate request </span><span class="si">%(request)s</span><span class="s2">&#34;</span>
+                   <span class="s2">&#34; - no more duplicates will be shown&#34;</span>
+                   <span class="s2">&#34; (see DUPEFILTER_DEBUG to show all duplicates)&#34;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;request&#39;</span><span class="p">:</span> <span class="n">request</span><span class="p">},</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;spider&#39;</span><span class="p">:</span> <span class="n">spider</span><span class="p">})</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logdupes</span> <span class="o">=</span> <span class="bp">False</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>要实现去重最主要的两个函数就是<code>request_seen</code>,<code>request_fingerprint</code>.他们做个很简单的事就是获取当前请求的指纹,然后把指纹加入到redis的一个set中.redis中的set数据结构特点是无序,不可重复,无论数据有多少插入删除的时间复杂度为O(1).至于请求的指纹他们时调用requests库的方法实现的.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">_fingerprint_cache</span> <span class="o">=</span> <span class="n">weakref</span><span class="o">.</span><span class="n">WeakKeyDictionary</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">request_fingerprint</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">include_headers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Return the request fingerprint.
+</span><span class="s2">
+</span><span class="s2">    The request fingerprint is a hash that uniquely identifies the resource the
+</span><span class="s2">    request points to. For example, take the following two urls:
+</span><span class="s2">
+</span><span class="s2">    http://www.example.com/query?id=111&amp;cat=222
+</span><span class="s2">    http://www.example.com/query?cat=222&amp;id=111
+</span><span class="s2">
+</span><span class="s2">    Even though those are two different URLs both point to the same resource
+</span><span class="s2">    and are equivalent (ie. they should return the same response).
+</span><span class="s2">
+</span><span class="s2">    Another example are cookies used to store session ids. Suppose the
+</span><span class="s2">    following page is only accesible to authenticated users:
+</span><span class="s2">
+</span><span class="s2">    http://www.example.com/members/offers.html
+</span><span class="s2">
+</span><span class="s2">    Lot of sites use a cookie to store the session id, which adds a random
+</span><span class="s2">    component to the HTTP Request and thus should be ignored when calculating
+</span><span class="s2">    the fingerprint.
+</span><span class="s2">
+</span><span class="s2">    For this reason, request headers are ignored by default when calculating
+</span><span class="s2">    the fingeprint. If you want to include specific headers use the
+</span><span class="s2">    include_headers argument, which is a list of Request headers to include.
+</span><span class="s2">
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="k">if</span> <span class="n">include_headers</span><span class="p">:</span>
+        <span class="n">include_headers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                                 <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">include_headers</span><span class="p">))</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">_fingerprint_cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="k">if</span> <span class="n">include_headers</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">()</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">))</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">to_bytes</span><span class="p">(</span><span class="n">canonicalize_url</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">)))</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span> <span class="ow">or</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">include_headers</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">hdr</span> <span class="ow">in</span> <span class="n">include_headers</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">hdr</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span>
+                    <span class="n">fp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">hdr</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">getlist</span><span class="p">(</span><span class="n">hdr</span><span class="p">):</span>
+                        <span class="n">fp</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">cache</span><span class="p">[</span><span class="n">include_headers</span><span class="p">]</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">include_headers</span><span class="p">]</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>正如上面的注释所说,url的query会被忽略,因为他们指向的是同一网络资源.并且会默认忽略请求头里的东西来生成唯一指纹,因为很多站点拿请求头存一些类似于session的东西,但是开发者可以自己指定请求头.</p>
+<p>fp哈希值里最多会包含如下信息:</p>
+<ol>
+<li>请求方法</li>
+<li>请求url</li>
+<li>请求body</li>
+<li>headers里的hdr</li>
+</ol>
+<p>使用这么多东西来确保请求的唯一性,好啦源码分析结束~~</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-10-31
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">python</a>
+          <a href="/tags/%E7%88%AC%E8%99%AB/">爬虫</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/my-development-tools/">
+            <span class="next-text nav-default">我的工作空间</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
