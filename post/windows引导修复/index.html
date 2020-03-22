@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Windows引导修复 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="首先，先介绍一下我的状况：双系统，Windows10引导被误删，然后在网上各种Google教程，然并卵&amp;hellip;&amp;hellip;直到我" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/windows%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Windows引导修复" />
+<meta property="og:description" content="首先，先介绍一下我的状况：双系统，Windows10引导被误删，然后在网上各种Google教程，然并卵&hellip;&hellip;直到我" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/windows%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/" />
+<meta property="article:published_time" content="2019-04-17T10:40:02+08:00" />
+<meta property="article:modified_time" content="2019-04-17T10:40:02+08:00" />
+<meta itemprop="name" content="Windows引导修复">
+<meta itemprop="description" content="首先，先介绍一下我的状况：双系统，Windows10引导被误删，然后在网上各种Google教程，然并卵&hellip;&hellip;直到我">
+<meta itemprop="datePublished" content="2019-04-17T10:40:02&#43;08:00" />
+<meta itemprop="dateModified" content="2019-04-17T10:40:02&#43;08:00" />
+<meta itemprop="wordCount" content="1238">
+
+
+
+<meta itemprop="keywords" content="Windows,引导修复," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Windows引导修复"/>
+<meta name="twitter:description" content="首先，先介绍一下我的状况：双系统，Windows10引导被误删，然后在网上各种Google教程，然并卵&hellip;&hellip;直到我"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Windows引导修复</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-04-17 </span>
+        <div class="post-category">
+            <a href="/categories/windows/"> Windows </a>
+            </div>
+          <span class="more-meta"> 约 1238 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#来自httpmcfancomcnpcarticle128212">来自：http://m.cfan.com.cn/pcarticle/128212</a></li>
+        <li><a href="#bios">BIOS</a></li>
+        <li><a href="#uefi我未实践因为我电脑只支持bios老机器了">UEFI（我未实践因为我电脑只支持BIOS，老机器了）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>首先，先介绍一下我的状况：双系统，Windows10引导被误删，然后在网上各种Google教程，然并卵&hellip;&hellip;直到我看到这篇文章，让我对操作系统的启动有了更加深刻的认识，下面说一下我的理解，希望能帮到更多小白。</p>
+<h3 id="来自httpmcfancomcnpcarticle128212">来自：http://m.cfan.com.cn/pcarticle/128212</h3>
+<hr>
+<p>下面请先看这张图
+<img src="https://img-blog.csdn.net/20180430182103621?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29vdXh4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="Windows的开机过程">
+从上面可以看出，面前主流的电脑基本都支持两种开机引导模式<strong>UEFI</strong> 和 <strong>BIOS</strong> （在BIOS界面可以设置）接下来按照两种引导模式来具体介绍如何修复。</p>
+<h3 id="bios">BIOS</h3>
+<p>出错情况一：由于病毒或者误操作，将<code>C:\bootmgr</code>，<code>C:\boot\bcd</code>，<code>C:\windows\system32\winload.exe</code> 任一文件删除，可想而知，肯定无法启动啦。
+解决方法：从网上下载，或者从别人电脑上将此文件复制进自己U盘，通过winPE进入系统，将这些文件放到相应位置。
+出错情况二：上述文件都还在，但是一不小心将开机引导条目删除，双系统的同学知道，开机时会让你选进哪个系统，就是指那个，单系统的话就一个系统，不会让你选直接就进了。</p>
+<p>解决方法：用U盘制作PE进入系统（设置U盘为首选启动项，或者按f12）
+进去后应该会有引导修复工具，用<code>bootice引导修复工具</code>,菜单栏选择BCD编辑，新建BCD,选择<code>C:\boot\bcd</code>,进入编辑界面后，按照下图填写（以Windows10为例）。然后重启就能正常进入系统了。
+<img src="https://img-blog.csdn.net/20180430183920180?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29vdXh4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h3 id="uefi我未实践因为我电脑只支持bios老机器了">UEFI（我未实践因为我电脑只支持BIOS，老机器了）</h3>
+<p>首先检查主板BIOS设置是否有误。如果用户人为设置关闭UEFI引导（这样会导致仅UEFI引导的电脑引导错误，因为找不到“\EFI\Bootbootx64.efi”引导文件），或者仅UEFI启动（这样会导致BIOS引导电脑出错，因为找不到“C:\bootmgr”引导文件。）</p>
+<p>如果还是不行，那么就用win10核心的PE（我用的微PE），进入系统，里面有个UEFI引导修复工具，进入命令提示符，输入<code>bcdboot C:\Windows  /s S: /f uefi /l zh-cn</code></p>
+<ol>
+<li>BIOS+MBR 常用
+<code>bcdboot C:\Windows /l zh-cn</code>
+解释：从系统盘C:\Windows目录中复制启动文件，并创建BCD（中文）启动菜单，从而修复系统启动环境。</li>
+<li>UEFI+GPT 常用
+<code>bcdboot C:\Windows  /s S: /f uefi /l zh-cn</code>
+解释：用DG等工具先将ESP分区装载为S盘，从系统盘C:\Windows目录中复制UEFI格式的启动文件到ESP分区中，修复系统。</li>
+</ol>
+<p><code>c:\windows</code> 系统安装目录，打开我的电脑，查看你的系统是安装在那个盘，就输入相应的盘符和目录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">/s S: 指定esp分区所在磁盘，小编指定ESP分区为t盘。 
+/f uefi 指定启动方式为uefi，注意之间的空格一定要输入。 
+/l zh-cn 指定uefi启动界面语言为简体中文
+</code></pre></td></tr></table>
+</div>
+</div><p>以上命令正确执行的前提为：</p>
+<ol>
+<li>启动分区存在</li>
+<li>windows安装盘中启动文件存在</li>
+</ol>
+<p>关于怎么查看具体的分区况状请使用<code>dispart</code> 命令（自行百度）</p>
+<p>如果你是多系统的话上面方法只能修复Windows引导，你可以使用上面提到的<code>bootice</code> 工具进行添加条目，或者你进了Windows之后使用<code>easyBCD</code>这个软件添加。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-04-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/windows/">Windows</a>
+          <a href="/tags/%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/">引导修复</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">编译安装VIM8.0以及安装YouCompleteMe</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">
+            <span class="next-text nav-default">pipenv虚拟环境工具详细教程</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

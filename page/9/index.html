@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="wxx&#39;s blog" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/" />
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="wxx&#39;s blog" />
+  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="wxx&#39;s blog" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="wxx&#39;s blog" />
+<meta property="og:description" content="wxx&#39;s blog" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://localhost:1313/" />
+<meta property="og:updated_time" content="2019-10-31T09:36:55+08:00" />
+<meta itemprop="name" content="wxx&#39;s blog">
+<meta itemprop="description" content="wxx&#39;s blog"><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="wxx&#39;s blog"/>
+<meta name="twitter:description" content="wxx&#39;s blog"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bmatplotlib%E7%9A%84%E4%BD%BF%E7%94%A8/">matplotlib的使用</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-05 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+          <a href="/categories/matplotlib/"> matplotlib </a>
+          </div>
+        <span class="more-meta"> 约 640 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      安装 1 2 3 $ pip3 install matplotlib // 在用的时候会报错ModuleNotFoundError: No module named &#39;tkinter&#39; $ sudo apt-get install python3-tk 简单使用 1 2 3 4 5 x = np.linspace(-1, 1, 50) # 生成线段 y = 2*x+1 plt.figure()
+    </div>
+    <div class="read-more">
+      <a href="/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bmatplotlib%E7%9A%84%E4%BD%BF%E7%94%A8/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/">pandas学习笔记</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-04 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+          <a href="/categories/pandas/"> pandas </a>
+          </div>
+        <span class="more-meta"> 约 3240 字 </span>
+        <span class="more-meta"> 预计阅读 7 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      pandas与numpy的区别 pandas是基于numpy构建的,使得numpy为中心的应用变得更加简单,两个主要的数据结构:Series和
+    </div>
+    <div class="read-more">
+      <a href="/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/">numpy学习笔记</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-04 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"> 机器学习 </a>
+          <a href="/categories/numpy/"> numpy </a>
+          </div>
+        <span class="more-meta"> 约 1126 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      numpy介绍 NumPy是使用Python进行科学计算的基础包。它包含其他内容： 一个强大的N维数组对象 复杂的（广播）功能 用于集成C / C ++和
+    </div>
+    <div class="read-more">
+      <a href="/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/bruteforcealgoritmc&#43;&#43;ver/">BF算法C&#43;&#43;版</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-04 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          </div>
+        <span class="more-meta"> 约 259 字 </span>
+        <span class="more-meta"> 预计阅读 1 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      这是字符串暴力匹配算法的C_++版本 暴力匹配的思路:使用穷举的方法,目标串和模式串进行匹配,一旦失配,目标串指针(或者说数组索引值)回退到下
+    </div>
+    <div class="read-more">
+      <a href="/post/bruteforcealgoritmc&#43;&#43;ver/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/kmpalgorithmc&#43;&#43;ver/">KMP算法C&#43;&#43;版</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2018-12-04 </span>
+      <div class="post-category">
+          <a href="/categories/c&#43;&#43;/"> C&#43;&#43; </a>
+          </div>
+        <span class="more-meta"> 约 510 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      KMP算法C++版本 KMP算法基本思路:构造next[]减少回溯 next的构造 1 2 3 4 5 6 7 8 9 10 11 12 void GetNext(SqString t, int next[]){ int j,k; j=0;k=-1; next[0] = -1; while(j &lt; t.length-1){ if(k==-1 || t.data[j]==t.data[k]){ j++;k++; next[i]=k;
+    </div>
+    <div class="read-more">
+      <a href="/post/kmpalgorithmc&#43;&#43;ver/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    </section>
+  
+  <nav class="pagination">
+    <a class="prev" href="/page/8/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    <a class="next" href="/page/10/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+  </nav>
+        </div>
+        
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

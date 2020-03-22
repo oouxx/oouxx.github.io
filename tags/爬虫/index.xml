@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>爬虫 on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</link>
+    <description>Recent content in 爬虫 on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 31 Oct 2019 09:36:55 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>scrapy-redis重复过滤器源码分析</title>
+      <link>http://localhost:1313/post/scrapy-redis%E9%87%8D%E5%A4%8D%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <pubDate>Thu, 31 Oct 2019 09:36:55 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/scrapy-redis%E9%87%8D%E5%A4%8D%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <description>scrapy时Python界非常著名的爬虫框架,但是一遇到分布式应用的话就会捉襟见肘了,scrapy-redis就是为了解决这一痛点诞生的,</description>
+    </item>
+    
+  </channel>
+</rss>

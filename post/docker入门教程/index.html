@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>docker入门教程 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="docker 安装 下面以Ubuntu为例介绍docker的安装 卸载旧版本 1 2 3 $ sudo apt-get remove docker \ docker-engine \ docker.io 使用apt安装 1 2 3 4 5 6 7 8 $ sudo apt-get update $ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="docker入门教程" />
+<meta property="og:description" content="docker 安装 下面以Ubuntu为例介绍docker的安装 卸载旧版本 1 2 3 $ sudo apt-get remove docker \ docker-engine \ docker.io 使用apt安装 1 2 3 4 5 6 7 8 $ sudo apt-get update $ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" />
+<meta property="article:published_time" content="2019-05-26T09:44:07+08:00" />
+<meta property="article:modified_time" content="2019-05-26T09:44:07+08:00" />
+<meta itemprop="name" content="docker入门教程">
+<meta itemprop="description" content="docker 安装 下面以Ubuntu为例介绍docker的安装 卸载旧版本 1 2 3 $ sudo apt-get remove docker \ docker-engine \ docker.io 使用apt安装 1 2 3 4 5 6 7 8 $ sudo apt-get update $ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -">
+<meta itemprop="datePublished" content="2019-05-26T09:44:07&#43;08:00" />
+<meta itemprop="dateModified" content="2019-05-26T09:44:07&#43;08:00" />
+<meta itemprop="wordCount" content="1408">
+
+
+
+<meta itemprop="keywords" content="docker," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="docker入门教程"/>
+<meta name="twitter:description" content="docker 安装 下面以Ubuntu为例介绍docker的安装 卸载旧版本 1 2 3 $ sudo apt-get remove docker \ docker-engine \ docker.io 使用apt安装 1 2 3 4 5 6 7 8 $ sudo apt-get update $ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">docker入门教程</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%9D%82%E8%B0%88/"> 杂谈 </a>
+            </div>
+          <span class="more-meta"> 约 1408 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker">docker</a>
+      <ul>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#docker的简单使用">docker的简单使用</a></li>
+        <li><a href="#docker命令参考">docker命令参考</a></li>
+        <li><a href="#一张图总结docker命令">一张图总结docker命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="docker">docker</h2>
+<h3 id="安装">安装</h3>
+<p>下面以Ubuntu为例介绍docker的安装</p>
+<ol>
+<li>卸载旧版本</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt-get remove docker <span class="se">\
+</span><span class="se"></span>               docker-engine <span class="se">\
+</span><span class="se"></span>               docker.io
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>使用apt安装</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo apt-get update
+$ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -
+$ sudo add-apt-repository <span class="se">\
+</span><span class="se"></span>    <span class="s2">&#34;deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
+</span><span class="s2">    </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> \
+</span><span class="s2">    stable&#34;</span>
+$ sudo apt-get update
+$ sudo apt-get install docker-ce
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>脚本安装</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ curl -fsSL get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh --mirror Aliyun
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>建立docker用户组</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo groupadd docker
+$ sudo usermod -aG docker <span class="nv">$USER</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>启动docker-ce</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ sudo systemctl <span class="nb">enable</span> docker <span class="c1"># 开机自启</span>
+$ sudo systemctl start docker <span class="c1"># 开启docker服务</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>配置镜像加速</li>
+</ol>
+<ul>
+<li>Azure 中国镜像 <a href="https://dockerhub.azk8s.cn">https://dockerhub.azk8s.cn</a></li>
+<li>阿里云加速器(需登录账号获取)</li>
+<li>七牛云加速器 <a href="https://reg-mirror.qiniu.com">https://reg-mirror.qiniu.com</a></li>
+</ul>
+<p>操作方法很简单，得到加速地址后执行<code>sudo vim /etc/docker/daemon.json</code>
+向里面添加镜像加速地址就行了，下面是一个例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    registry-mirrors:[https://xxxx.mirror.aliyuncs.com]
+}
+</code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>测试docker是否正确安装</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ docker run hello-world
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="docker的简单使用">docker的简单使用</h3>
+<h3 id="docker命令参考">docker命令参考</h3>
+<p>可以通过 docker COMMAND &ndash;help 来查看这些命令的具体用法。</p>
+<ul>
+<li>attach：依附到一个正在运行的容器中；</li>
+<li>build：从一个 Dockerfile 创建一个镜像；</li>
+<li>commit：从一个容器的修改中创建一个新的镜像；</li>
+<li>cp：在容器和本地宿主系统之间复制文件中；</li>
+<li>create：创建一个新容器，但并不运行它；</li>
+<li>diff：检查一个容器内文件系统的修改，包括修改和增加；</li>
+<li>events：从服务端获取实时的事件；</li>
+<li>exec：在运行的容器内执行命令；</li>
+<li>export：导出容器内容为一个 tar 包；</li>
+<li>history：显示一个镜像的历史信息；</li>
+<li>images：列出存在的镜像；</li>
+<li>import：导入一个文件（典型为 tar 包）路径或目录来创建一个本地镜像；</li>
+<li>info：显示一些相关的系统信息；</li>
+<li>inspect：显示一个容器的具体配置信息；</li>
+<li>kill：关闭一个运行中的容器 (包括进程和所有相关资源)；</li>
+<li>load：从一个 tar 包中加载一个镜像；</li>
+<li>login：注册或登录到一个 Docker 的仓库服务器；</li>
+<li>logout：从 Docker 的仓库服务器登出；</li>
+<li>logs：获取容器的 log 信息；</li>
+<li>network：管理 Docker 的网络，包括查看、创建、删除、挂载、卸载等；</li>
+<li>node：管理 swarm 集群中的节点，包括查看、更新、删除、提升/取消管理节点等；</li>
+<li>pause：暂停一个容器中的所有进程；</li>
+<li>port：查找一个 nat 到一个私有网口的公共口；</li>
+<li>ps：列出主机上的容器；</li>
+<li>pull：从一个Docker的仓库服务器下拉一个镜像或仓库；</li>
+<li>push：将一个镜像或者仓库推送到一个 Docker 的注册服务器；</li>
+<li>rename：重命名一个容器；</li>
+<li>restart：重启一个运行中的容器；</li>
+<li>rm：删除给定的若干个容器；</li>
+<li>rmi：删除给定的若干个镜像；</li>
+<li>run：创建一个新容器，并在其中运行给定命令；</li>
+<li>save：保存一个镜像为 tar 包文件；</li>
+<li>search：在 Docker index 中搜索一个镜像；</li>
+<li>service：管理 Docker 所启动的应用服务，包括创建、更新、删除等；</li>
+<li>start：启动一个容器；</li>
+<li>stats：输出（一个或多个）容器的资源使用统计信息；</li>
+<li>stop：终止一个运行中的容器；</li>
+<li>swarm：管理 Docker swarm 集群，包括创建、加入、退出、更新等；</li>
+<li>tag：为一个镜像打标签；</li>
+<li>top：查看一个容器中的正在运行的进程信息；</li>
+<li>unpause：将一个容器内所有的进程从暂停状态中恢复；</li>
+<li>update：更新指定的若干容器的配置信息；</li>
+<li>version：输出 Docker 的版本信息；</li>
+<li>volume：管理 Docker volume，包括查看、创建、删除等；</li>
+<li>wait：阻塞直到一个容器终止，然后输出它的退出符。</li>
+</ul>
+<p>上面的命令基本上可以见名知意，轻松的写出docker命令，每一个docker命令都有相应的子命令，比如你可以通过执行官<code>docker build --help</code>查看<code>docker build</code>的具体用法</p>
+<h3 id="一张图总结docker命令">一张图总结docker命令</h3>
+<p><img src="/images/docker/cmd_logic.png" alt="docker_cmd_logic"></p>
+<p>详细教程请参考<a href="https://yeasy.gitbooks.io/docker_practice/">docker中文文档</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-26
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/docker/">docker</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/privoxy%E7%9C%9F%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">proxychains-ng代理上網</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/select-poll%E5%92%8Cepoll%E6%80%BB%E7%BB%93/">
+            <span class="next-text nav-default">select,poll和epoll总结</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

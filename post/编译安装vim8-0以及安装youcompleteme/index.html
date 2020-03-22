@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>编译安装VIM8.0以及安装YouCompleteMe - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="今天心血来潮想搞一搞VIM，然后就不停的Google&amp;hellip;&amp;hellip;，找各种教程，遇到了各种问题麻烦（心累并快乐着）&amp;hel" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="编译安装VIM8.0以及安装YouCompleteMe" />
+<meta property="og:description" content="今天心血来潮想搞一搞VIM，然后就不停的Google&hellip;&hellip;，找各种教程，遇到了各种问题麻烦（心累并快乐着）&hel" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/" />
+<meta property="article:published_time" content="2019-04-17T10:42:20+08:00" />
+<meta property="article:modified_time" content="2019-04-17T10:42:20+08:00" />
+<meta itemprop="name" content="编译安装VIM8.0以及安装YouCompleteMe">
+<meta itemprop="description" content="今天心血来潮想搞一搞VIM，然后就不停的Google&hellip;&hellip;，找各种教程，遇到了各种问题麻烦（心累并快乐着）&hel">
+<meta itemprop="datePublished" content="2019-04-17T10:42:20&#43;08:00" />
+<meta itemprop="dateModified" content="2019-04-17T10:42:20&#43;08:00" />
+<meta itemprop="wordCount" content="1194">
+
+
+
+<meta itemprop="keywords" content="VIM,YouCompleteMe,编译," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="编译安装VIM8.0以及安装YouCompleteMe"/>
+<meta name="twitter:description" content="今天心血来潮想搞一搞VIM，然后就不停的Google&hellip;&hellip;，找各种教程，遇到了各种问题麻烦（心累并快乐着）&hel"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">编译安装VIM8.0以及安装YouCompleteMe</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-04-17 </span>
+        <div class="post-category">
+            <a href="/categories/linux/"> Linux </a>
+            <a href="/categories/vim/"> VIM </a>
+            </div>
+          <span class="more-meta"> 约 1194 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#第一步">第一步</a></li>
+        <li><a href="#第二步">第二步</a></li>
+        <li><a href="#第三步">第三步</a></li>
+        <li><a href="#第四步非必须">第四步（非必须）</a></li>
+        <li><a href="#第五步">第五步</a></li>
+        <li><a href="#第一步-1">第一步</a></li>
+        <li><a href="#第二步-1">第二步</a></li>
+        <li><a href="#第三步-1">第三步</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>今天心血来潮想搞一搞VIM，然后就不停的Google&hellip;&hellip;，找各种教程，遇到了各种问题麻烦（心累并快乐着）&hellip;&hellip;通过这篇文章,希望能让大家的VIM折腾之路更平坦一点。</p>
+<p>先报一下机型Ubuntu16.04TLS，自带VIM是7.4版本</p>
+<h3 id="第一步">第一步</h3>
+<h5 id="卸载自带vim">卸载自带VIM</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ dkpg -l | grep vim
+$ sudo dpkg -P vim vim-tiny vim-common #这里不限于这几个，看上一步命令列出来的内容，如果报依赖问题，不能卸载，用下面命令（我的就是报了依赖）
+$ sudo apt-get remove vim-tiny vim-common
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第二步">第二步</h3>
+<h5 id="安装依赖">安装依赖</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+python3-dev ruby-dev lua5.1 lua5.1-dev git
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第三步">第三步</h3>
+<h5 id="下载vim源码并编译安装">下载VIM源码并编译安装</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cd ~
+$ git clone https://github.com/vim/vim.git
+$ cd vim
+$ ./configure --with-features=huge \
+--enable-multibyte \
+--enable-rubyinterp=yes \
+--enable-pythoninterp=yes \
+--with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu  \
+--enable-python3interp=yes \
+--with-python3-config-dir=/usr/lib/python3.5/config-x86_64-linux-gnu  \
+--enable-perlinterp=yes \
+--enable-luainterp=yes \
+--enable-gui=gtk2 --enable-cscope --prefix=/usr
+$ make VIMRUNTIMEDIR=/usr/share/vim/vim80 #重新编译了几次每次都把这句给忘了，太注重上面的参数了QAQ
+$ sudo make install  
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>其中参数说明如下：<br>
+&ndash;with-features = huge：支持最大特性<br>
+&ndash;enable-multibyte：多字节支持可以在Vim中输入中文<br>
+&ndash;enable-rubyinterp：启用Vim对ruby编写的插件的支持<br>
+&ndash;enable-pythoninterp：启用Vim对python2 编写的插件的支持
+&ndash;enable-python3interp:   启用Vim对python3 编写的插件的支持
+&ndash;enable-luainterp：启用Vim对于lua 编写的插件的支持<br>
+&ndash;enable-perlinterp：启用Vim对perl编写的插件的支持<br>
+&ndash;enable-cscope：Vim对cscope支持<br>
+&ndash;with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu :指定python路径
+&ndash;enable-gui = gtk2：gtk2支持，也可以使用gnome，表示生成gvim<br>
+-prefix = / usr：编译安装路径</p>
+</blockquote>
+<h3 id="第四步非必须">第四步（非必须）</h3>
+<h5 id="安装checkinstall工具">安装checkinstall工具</h5>
+<p>可以安装checkinstall工具将从源码安装的软件变得像用deb包安装的一样，方便以后可以直接用sudo dpkg -P vim删除vim：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo apt-get install checkinstall
+$ cd vim
+$ sudo checkinstall
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第五步">第五步</h3>
+<h5 id="设置vim为默认编辑器">设置VIM为默认编辑器</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ sudo update-alternatives --install /usr/bin/editor editor /usr/bin/vim 1
+$ sudo update-alternatives --set editor /usr/bin/vim
+$ sudo update-alternatives --install /usr/bin/vi vi /usr/bin/vim 1
+$ sudo update-alternatives --set vi /usr/bin/vim
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p>下面开始安装VIM插件</p>
+<h3 id="第一步-1">第一步</h3>
+<h5 id="安装vundle插件管理器">安装Vundle插件管理器</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第二步-1">第二步</h3>
+<h5 id="配置vimrc">配置.vimrc</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ vim ~/.vimrc#这个还是网上找大佬的吧,复制粘贴一下，我用VIM也没多久。
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">set nocompatible &#34;be iMproved, required
+filetype off &#34; required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+call vundle#end()
+filetype plugin indent on
+#这些基本就是.vimrc文件必须的语句，其中插件必须放在`call vundle#begin()`
+和`call vundle#end()` 之间
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="第三步-1">第三步</h3>
+<h5 id="安装youcompleteme">安装YouCompleteMe</h5>
+<p>写入.vimrc文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">Plugin &#39;Valloric/YouCompleteMe&#39;
+$ vim
+:PluginInstall
+</code></pre></td></tr></table>
+</div>
+</div><p>完成之后</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">$ cd ~/.vim/bundle/YouCompleteMe
+./install.py --clang-completer 
+#当我运行这个语句的时候去使用vim结果一直给我报错（the ycmd server shut down(restart......记不太清了)）
+$sudo python3 install.py --clang-completer
+#我再issue上找到了答案（https://github.com/Valloric/YouCompleteMe/issues/914）
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-04-17
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/vim/">VIM</a>
+          <a href="/tags/youcompleteme/">YouCompleteMe</a>
+          <a href="/tags/%E7%BC%96%E8%AF%91/">编译</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python中的除法</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/windows%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/">
+            <span class="next-text nav-default">Windows引导修复</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>tornado安全cookie - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="tornado安全cookie 文章源代码过多，参照tornado源码看本文效果更佳 Secure Cookies Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornad" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="tornado安全cookie" />
+<meta property="og:description" content="tornado安全cookie 文章源代码过多，参照tornado源码看本文效果更佳 Secure Cookies Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornad" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/" />
+<meta property="article:published_time" content="2019-05-07T02:21:39+08:00" />
+<meta property="article:modified_time" content="2019-05-07T02:21:39+08:00" />
+<meta itemprop="name" content="tornado安全cookie">
+<meta itemprop="description" content="tornado安全cookie 文章源代码过多，参照tornado源码看本文效果更佳 Secure Cookies Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornad">
+<meta itemprop="datePublished" content="2019-05-07T02:21:39&#43;08:00" />
+<meta itemprop="dateModified" content="2019-05-07T02:21:39&#43;08:00" />
+<meta itemprop="wordCount" content="2712">
+
+
+
+<meta itemprop="keywords" content="tornado,Secure Cookie,源码解读," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="tornado安全cookie"/>
+<meta name="twitter:description" content="tornado安全cookie 文章源代码过多，参照tornado源码看本文效果更佳 Secure Cookies Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornad"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">tornado安全cookie</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-07 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"> 源码解读 </a>
+            </div>
+          <span class="more-meta"> 约 2712 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tornado安全cookie">tornado安全cookie</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="tornado安全cookie">tornado安全cookie</h3>
+<p>文章源代码过多，参照tornado源码看本文效果更佳</p>
+<h4 id="secure-cookies">Secure Cookies</h4>
+<p>Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornado 的 Secure Cookies 使用加密签名来验证 Cookie 数据是否被非法修改过，签名后的 Cookie 数据包括时间戳、 HMAC 签名和编码后的 cookie 值等信息。<code>tornado.web.RequestHandler</code> 通过 <code>set_secure_cookie()</code> 和 <code>get_secure_cookie()</code> 方法来设置和获取 Secure Cookies，因为 HMAC 签名密钥是由 <code>tornado.web.Application</code> 实例来提供的，所以在实例化 <code>tornado.web.Application</code> 时必须在 settings 中提供 <code>cookie_secret</code> 参数才能使用安全 Cookies。否则，<code>self.require_setting(&quot;cookie_secret&quot;, &quot;secure cookies&quot;)</code> 会抛出未设置 cookie_secret 异常。</p>
+<p>cookie_secret 参数是一个随机字节序列，用来制作 HMAC 签名，可以使用下面的代码来生成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">base64</span><span class="o">,</span> <span class="nn">uuid</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">bytes</span> <span class="o">+</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="n">bytes</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>set_secure_cookie</code> 方法是对 <code>set_cookie</code> 方法的包装，其中的value值调用<code>create_signed_value()</code>实现，需要注意的是<code>expires_days</code>这个参数与 get_secure_cookie 方法的 <code>max_age_days</code> 参数严格来讲没有必然的联系，我们可以使用一个小于 expires_days 的 <code>max_age_days</code> 值在服务端控制安全 Cookie 的有效期（这个是与安全 Cookie 中的时间戳比较得到的，后面会从代码中看到）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"> <span class="k">def</span> <span class="nf">set_secure_cookie</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">],</span>
+        <span class="n">expires_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="c1"># cookie过期时间，默认30天</span>
+        <span class="n">version</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="c1"># 为了兼容旧版本的签名方式， version=1 使用SHA1签名， version=2 使用SHA256签名</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_cookie</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">create_signed_value</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">),</span>
+            <span class="n">expires_days</span><span class="o">=</span><span class="n">expires_days</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+ <span class="k">def</span> <span class="nf">set_cookie</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">],</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">expires</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&#34;/&#34;</span><span class="p">,</span>
+        <span class="n">expires_days</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># The cookie library only accepts type str, in both python 2 and 3</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">escape</span><span class="o">.</span><span class="n">native_str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="c1"># 转义为原生字符串</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">escape</span><span class="o">.</span><span class="n">native_str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;[\x00-\x20]&#34;</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="n">value</span><span class="p">):</span>
+            <span class="c1"># Don&#39;t let us accidentally inject bad stuff</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;Invalid cookie </span><span class="si">%r</span><span class="s2">: </span><span class="si">%r</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&#34;_new_cookie&#34;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_new_cookie</span> <span class="o">=</span> <span class="n">http</span><span class="o">.</span><span class="n">cookies</span><span class="o">.</span><span class="n">SimpleCookie</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_cookie</span><span class="p">:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_cookie</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_new_cookie</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">morsel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new_cookie</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">domain</span><span class="p">:</span>
+            <span class="n">morsel</span><span class="p">[</span><span class="s2">&#34;domain&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domain</span>
+        <span class="k">if</span> <span class="n">expires_days</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">expires</span><span class="p">:</span>
+            <span class="n">expires</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">expires_days</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expires</span><span class="p">:</span>
+            <span class="n">morsel</span><span class="p">[</span><span class="s2">&#34;expires&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">httputil</span><span class="o">.</span><span class="n">format_timestamp</span><span class="p">(</span><span class="n">expires</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">morsel</span><span class="p">[</span><span class="s2">&#34;path&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="s2">&#34;max_age&#34;</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="s2">&#34;max-age&#34;</span>
+
+            <span class="c1"># skip falsy values for httponly and secure flags because</span>
+            <span class="c1"># SimpleCookie sets them regardless</span>
+            <span class="c1"># 没有httponly和secure的value值直接跳过，反正SimpleCookie会设置他们</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&#34;httponly&#34;</span><span class="p">,</span> <span class="s2">&#34;secure&#34;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">v</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">morsel</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+<span class="k">def</span> <span class="nf">create_signed_value</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">],</span> <span class="n">version</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="c1"># 检查是否设置cookie_secret,没有设置会报错</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">require_setting</span><span class="p">(</span><span class="s2">&#34;cookie_secret&#34;</span><span class="p">,</span> <span class="s2">&#34;secure cookies&#34;</span><span class="p">)</span>
+        <span class="n">secret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&#34;cookie_secret&#34;</span><span class="p">]</span>
+        <span class="n">key_version</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="c1"># 当secret是一个dict时要设置key_version</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;key_version&#34;</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;key_version setting must be used for secret_key dicts&#34;</span><span class="p">)</span>
+            <span class="n">key_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&#34;key_version&#34;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">create_signed_value</span><span class="p">(</span>
+            <span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">key_version</span><span class="o">=</span><span class="n">key_version</span>
+        <span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>create_signed_value</code> 函数的代码及相关签名函数如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="c1"># 指定默认签名版本</span>
+<span class="n">DEFAULT_SIGNED_VALUE_VERSION</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># 重载了同名方法</span>
+<span class="k">def</span> <span class="nf">create_signed_value</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">clock</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">DEFAULT_SIGNED_VALUE_VERSION</span>
+    <span class="k">if</span> <span class="n">clock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">clock</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">clock</span><span class="p">())))</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="n">_create_signature_v1</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;|&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">value</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">signature</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">value</span>
+    <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="c1"># The v2 format consists of a version number and a series of</span>
+        <span class="c1"># length-prefixed fields &#34;%d:%s&#34;, the last of which is a</span>
+        <span class="c1"># signature, all separated by pipes.  All numbers are in</span>
+        <span class="c1"># decimal format with no leading zeros.  The signature is an</span>
+        <span class="c1"># HMAC-SHA256 of the whole string up to that point, including</span>
+        <span class="c1"># the final pipe.</span>
+        <span class="c1">#</span>
+        <span class="c1"># The fields are:</span>
+        <span class="c1"># - format version (i.e. 2; no length prefix)</span>
+        <span class="c1"># - key version (currently 0; reserved for future key rotation features)</span>
+        <span class="c1"># - timestamp (integer seconds since epoch)</span>
+        <span class="c1"># - name (not encoded; assumed to be ~alphanumeric)</span>
+        <span class="c1"># - value (base64-encoded)</span>
+        <span class="c1"># - signature (hex-encoded; no length prefix)</span>
+        <span class="k">def</span> <span class="nf">format_field</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">utf8</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%d</span><span class="s2">:&#34;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span> <span class="o">+</span> <span class="n">utf8</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">to_sign</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;|&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+            <span class="sa">b</span><span class="s2">&#34;2|1:0&#34;</span><span class="p">,</span>
+            <span class="n">format_field</span><span class="p">(</span><span class="n">timestamp</span><span class="p">),</span>
+            <span class="n">format_field</span><span class="p">(</span><span class="n">name</span><span class="p">),</span>
+            <span class="n">format_field</span><span class="p">(</span><span class="n">value</span><span class="p">),</span>
+            <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">])</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="n">_create_signature_v2</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">to_sign</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">to_sign</span> <span class="o">+</span> <span class="n">signature</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;Unsupported version </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">version</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_create_signature_v1</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="o">*</span><span class="n">parts</span><span class="p">):</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">secret</span><span class="p">),</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="nb">hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">part</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">utf8</span><span class="p">(</span><span class="nb">hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">_create_signature_v2</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="nb">hash</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">secret</span><span class="p">),</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span>
+    <span class="nb">hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">utf8</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">utf8</span><span class="p">(</span><span class="nb">hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>模块变量 <code>DEFAULT_SIGNED_VALUE_VERSION</code> 硬编码指示默认的签名版本是 2，除非调用 set_secure_cookie 时指定版本号。两个版本之间的数据格式看代码就很明确，版本 1 就是简单的 “value|timestamp|signature” 拼接，版本 2 多了几个字段，并且记录值的字符串长度，尤其是预留的 <code>key_version</code> 字段为后续轮流使用多个 cookie_secret 提供了支持,并且对整个字符串进行签名（版本 1 仅仅对 value 进行了签名），这样可以大大增加安全系数。这里额外提一下时间戳（timestamp）字段，由于客户端在发送 Cookie 时并不会提供有效期，为了能够准确控制有效期，这里将 Cookie 生成的时间戳写入值当中，以便后续在服务端进行有效期验证。</p>
+<h4 id="get_secure_cookie-方法">get_secure_cookie 方法</h4>
+<p><code>get_secure_cookie</code> 方法签名中的 value 参数指的是通过 set_secure_cookie 加密签名后的 Cookie 值，默认是 None 则会从客户端发送回来的 Cookies 中获取指定名称的 Cookie 值作为 value，再进行签名验证，传入的 <code>max_age_days</code>，<code>min_version</code> 将对 Cookie 做进一步比较验证，验证通过以后返回 base64 解码的 Cookie 值（也就是下面注释中说的不论 python 的版本，返回的是 byte string，与 get_cookie 方法不同。get_cookie 方法在 python3 中返回的是 unicode string。）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="k">def</span> <span class="nf">get_secure_cookie</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">max_age_days</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="n">min_version</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">require_setting</span><span class="p">(</span><span class="s2">&#34;cookie_secret&#34;</span><span class="p">,</span> <span class="s2">&#34;secure cookies&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cookie</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decode_signed_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s2">&#34;cookie_secret&#34;</span><span class="p">],</span>
+                               <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">max_age_days</span><span class="o">=</span><span class="n">max_age_days</span><span class="p">,</span>
+                               <span class="n">min_version</span><span class="o">=</span><span class="n">min_version</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>除了要进行编码还要进行解码<code>decode_signed_value</code> 方法的相关代码如下所示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">DEFAULT_SIGNED_VALUE_MIN_VERSION</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># A leading version number in decimal with no leading zeros, followed by a pipe.</span>
+<span class="n">_signed_value_version_re</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">br</span><span class="s2">&#34;^([1-9][0-9]*)\|(.*)$&#34;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">decode_signed_value</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">max_age_days</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="n">clock</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">min_version</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">clock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">clock</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span>
+    <span class="k">if</span> <span class="n">min_version</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">min_version</span> <span class="o">=</span> <span class="n">DEFAULT_SIGNED_VALUE_MIN_VERSION</span>
+    <span class="k">if</span> <span class="n">min_version</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;Unsupported min_version </span><span class="si">%d</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">min_version</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+    <span class="c1"># Figure out what version this is.  Version 1 did not include an</span>
+    <span class="c1"># explicit version field and started with arbitrary base64 data,</span>
+    <span class="c1"># which makes this tricky.</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">_signed_value_version_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">version</span> <span class="o">&gt;</span> <span class="mi">999</span><span class="p">:</span>
+                <span class="c1"># Certain payloads from the version-less v1 format may</span>
+                <span class="c1"># be parsed as valid integers.  Due to base64 padding</span>
+                <span class="c1"># restrictions, this can only happen for numbers whose</span>
+                <span class="c1"># length is a multiple of 4, so we can treat all</span>
+                <span class="c1"># numbers up to 999 as versions, and for the rest we</span>
+                <span class="c1"># fall back to v1 format.</span>
+                <span class="n">version</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">version</span> <span class="o">&lt;</span> <span class="n">min_version</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_decode_signed_value_v1</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">max_age_days</span><span class="p">,</span> <span class="n">clock</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">version</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_decode_signed_value_v2</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">max_age_days</span><span class="p">,</span> <span class="n">clock</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+<span class="k">def</span> <span class="nf">_decode_signed_value_v1</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">max_age_days</span><span class="p">,</span> <span class="n">clock</span><span class="p">):</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">utf8</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;|&#34;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">_create_signature_v1</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_time_independent_equals</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">signature</span><span class="p">):</span>
+        <span class="n">gen_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;Invalid cookie signature </span><span class="si">%r</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">max_age_days</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">:</span>
+        <span class="n">gen_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;Expired cookie </span><span class="si">%r</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">timestamp</span> <span class="o">&gt;</span> <span class="n">clock</span><span class="p">()</span> <span class="o">+</span> <span class="mi">31</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">:</span>
+        <span class="c1"># _cookie_signature does not hash a delimiter between the</span>
+        <span class="c1"># parts of the cookie, so an attacker could transfer trailing</span>
+        <span class="c1"># digits from the payload to the timestamp without altering the</span>
+        <span class="c1"># signature.  For backwards compatibility, sanity-check timestamp</span>
+        <span class="c1"># here instead of modifying _cookie_signature.</span>
+        <span class="n">gen_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;Cookie timestamp in future; possible tampering </span><span class="si">%r</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">b</span><span class="s2">&#34;0&#34;</span><span class="p">):</span>
+        <span class="n">gen_log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;Tampered cookie </span><span class="si">%r</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+<span class="k">def</span> <span class="nf">_decode_signed_value_v2</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">max_age_days</span><span class="p">,</span> <span class="n">clock</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_consume_field</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="n">length</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+        <span class="n">field_value</span> <span class="o">=</span> <span class="n">rest</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+        <span class="c1"># In python 3, indexing bytes returns small integers; we must</span>
+        <span class="c1"># use a slice to get a byte string as in python 2.</span>
+        <span class="k">if</span> <span class="n">rest</span><span class="p">[</span><span class="n">n</span><span class="p">:</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="sa">b</span><span class="s1">&#39;|&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;malformed v2 signed value field&#34;</span><span class="p">)</span>
+        <span class="n">rest</span> <span class="o">=</span> <span class="n">rest</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">field_value</span><span class="p">,</span> <span class="n">rest</span>
+    <span class="n">rest</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>  <span class="c1"># remove version number</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">key_version</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">_consume_field</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+        <span class="n">timestamp</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">_consume_field</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+        <span class="n">name_field</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">_consume_field</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+        <span class="n">value_field</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">_consume_field</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">passed_sig</span> <span class="o">=</span> <span class="n">rest</span>
+    <span class="n">signed_string</span> <span class="o">=</span> <span class="n">value</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">passed_sig</span><span class="p">)]</span>
+    <span class="n">expected_sig</span> <span class="o">=</span> <span class="n">_create_signature_v2</span><span class="p">(</span><span class="n">secret</span><span class="p">,</span> <span class="n">signed_string</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_time_independent_equals</span><span class="p">(</span><span class="n">passed_sig</span><span class="p">,</span> <span class="n">expected_sig</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">name_field</span> <span class="o">!=</span> <span class="n">utf8</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">timestamp</span> <span class="o">&lt;</span> <span class="n">clock</span><span class="p">()</span> <span class="o">-</span> <span class="n">max_age_days</span> <span class="o">*</span> <span class="mi">86400</span><span class="p">:</span>
+        <span class="c1"># The signature has expired.</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">value_field</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">hmac</span><span class="p">,</span> <span class="s1">&#39;compare_digest&#39;</span><span class="p">):</span>  <span class="c1"># python 3.3</span>
+    <span class="n">_time_independent_equals</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">compare_digest</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_time_independent_equals</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>  <span class="c1"># python3 byte strings</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">^</span> <span class="n">y</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># python2</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">|=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>_signed_value_version_re</code>正则表达式用于获取签名所用的版本号，对于旧版本（版本 1 ）加密签名的 cookie 数据中没有版本号这个字段，默认取 1。然后与指定的 min_version 进行比较，仅当大于等于 min_version 才进行下一步验证。版本 1 由函数 _decode_signed_value_v1 验证，版本 2 由 函数 _decode_signed_value_v2 验证，这两个函数主要就是按照对应签名格式解析数据，并对目标签名和时间戳等字段进行比较验证。需要说一下的是由于版本 1 的设计缺陷，没有对 timestamp 进行签名，为了尽可能防止攻击者篡改时间戳来进行攻击， _decode_signed_value_v1 函数对 timestamp 执行了额外的检查（timestamp &gt; clock() + 31 * 86400），但这个检查并不能完全杜绝此类攻击。这应该也是重新设计版本 2 的一个原因。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-07
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/tornado/">tornado</a>
+          <a href="/tags/secure-cookie/">Secure Cookie</a>
+          <a href="/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">源码解读</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">tornado的XSRF防护</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/">
+            <span class="next-text nav-default">单例模式及其实现</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

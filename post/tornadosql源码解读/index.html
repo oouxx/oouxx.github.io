@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>tornadosql源码解读 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="tornadosql源码解读 因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="tornadosql源码解读" />
+<meta property="og:description" content="tornadosql源码解读 因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/" />
+<meta property="article:published_time" content="2019-05-03T19:28:03+08:00" />
+<meta property="article:modified_time" content="2019-05-03T19:28:03+08:00" />
+<meta itemprop="name" content="tornadosql源码解读">
+<meta itemprop="description" content="tornadosql源码解读 因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换">
+<meta itemprop="datePublished" content="2019-05-03T19:28:03&#43;08:00" />
+<meta itemprop="dateModified" content="2019-05-03T19:28:03&#43;08:00" />
+<meta itemprop="wordCount" content="1470">
+
+
+
+<meta itemprop="keywords" content="tornadosql,tornado,Python,源码解读," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="tornadosql源码解读"/>
+<meta name="twitter:description" content="tornadosql源码解读 因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">tornadosql源码解读</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-03 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"> 源码解读 </a>
+            </div>
+          <span class="more-meta"> 约 1470 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tornadosql源码解读">tornadosql源码解读</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h3 id="tornadosql源码解读">tornadosql源码解读</h3>
+<p>因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换为pymysql以兼容Python3。代码改编自<a href="https://github.com/bdarnell/torndb">torndb</a>,已开源安装<code>pip install tornadosql</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python">
+<span class="c1">#!/usr/bin/env python</span>
+<span class="c1">#</span>
+<span class="c1"># Copyright 2009 Facebook</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &#34;License&#34;); you may</span>
+<span class="c1"># not use this file except in compliance with the License. You may obtain</span>
+<span class="c1"># a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &#34;AS IS&#34; BASIS, WITHOUT</span>
+<span class="c1"># WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span>
+<span class="c1"># License for the specific language governing permissions and limitations</span>
+<span class="c1"># under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Modifier wangxinxing961129@gmail.com</span>
+
+<span class="s2">&#34;&#34;&#34;A lightweight wrapper around pymysql.
+</span><span class="s2">
+</span><span class="s2">Originally part of the Tornado framework.  The tornado.database module
+</span><span class="s2">is slated for removal in Tornado 3.0, and it is now available separately
+</span><span class="s2">as tornadosql.
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">with_statement</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>  
+<span class="kn">import</span> <span class="nn">itertools</span>  
+<span class="kn">import</span> <span class="nn">logging</span>  
+<span class="kn">import</span> <span class="nn">os</span>  
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>  
+    <span class="c1"># import MySQLdb.constants</span>
+    <span class="c1"># import MySQLdb.converters</span>
+    <span class="c1"># import MySQLdb.cursors</span>
+    <span class="kn">import</span> <span class="nn">pymysql.connections</span>
+    <span class="kn">import</span> <span class="nn">pymysql.converters</span>
+    <span class="kn">import</span> <span class="nn">pymysql.cursors</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  
+    <span class="c1"># try:</span>
+    <span class="c1">#     import pymysql as MySQLdb</span>
+    <span class="c1"># except ImportError:</span>
+        <span class="c1"># If MySQLdb isn&#39;t available this module won&#39;t actually be useable,</span>
+        <span class="c1"># but we want it to at least be importable on readthedocs.org,</span>
+        <span class="c1"># which has limitations on third-party modules.</span>
+        <span class="c1"># if &#39;READTHEDOCS&#39; in os.environ:</span>
+        <span class="c1">#     MySQLdb = None</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     raise</span>
+    <span class="k">raise</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s2">&#34;0.1&#34;</span>  
+<span class="n">version_info</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Connection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="s2">&#34;&#34;&#34;A lightweight wrapper around pymysql DB-API connections.
+</span><span class="s2">
+</span><span class="s2">    The main value we provide is wrapping rows in a dict/object so that
+</span><span class="s2">    columns can be accessed by name. Typical usage::
+</span><span class="s2">
+</span><span class="s2">        db = tornadosql.Connection(&#34;localhost&#34;, &#34;mydatabase&#34;)
+</span><span class="s2">        for article in db.query(&#34;SELECT * FROM articles&#34;):
+</span><span class="s2">            print article.title
+</span><span class="s2">
+</span><span class="s2">    Cursors are hidden by the implementation, but other than that, the methods
+</span><span class="s2">    are very similar to the DB-API.
+</span><span class="s2">
+</span><span class="s2">    We explicitly set the timezone to UTC and assume the character encoding to
+</span><span class="s2">    UTF-8 (can be changed) on all connections to avoid time zone and encoding errors.
+</span><span class="s2">
+</span><span class="s2">    The sql_mode parameter is set by default to &#34;traditional&#34;, which &#34;gives an error instead of a warning&#34;
+</span><span class="s2">    (http://dev.mysql.com/doc/refman/5.0/en/server-sql-mode.html). However, it can be set to
+</span><span class="s2">    any other mode including blank (None) thereby explicitly clearing the SQL mode.
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="c1"># pass params</span>
+    <span class="c1"># change connect_timeout from 0 to 10</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="n">database</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">max_idle_time</span><span class="o">=</span><span class="mi">7</span> <span class="o">*</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">connect_timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">time_zone</span><span class="o">=</span><span class="s2">&#34;+0:00&#34;</span><span class="p">,</span> <span class="n">charset</span> <span class="o">=</span> <span class="s2">&#34;utf8&#34;</span><span class="p">,</span> <span class="n">sql_mode</span><span class="o">=</span><span class="s2">&#34;TRADITIONAL&#34;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">database</span> <span class="o">=</span> <span class="n">database</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_idle_time</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">max_idle_time</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">conv</span><span class="o">=</span><span class="n">CONVERSIONS</span><span class="p">,</span> <span class="n">use_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="n">charset</span><span class="p">,</span>
+                    <span class="n">db</span><span class="o">=</span><span class="n">database</span><span class="p">,</span> <span class="n">init_command</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;SET time_zone = &#34;</span><span class="si">%s</span><span class="s1">&#34;&#39;</span> <span class="o">%</span> <span class="n">time_zone</span><span class="p">),</span>
+                    <span class="n">connect_timeout</span><span class="o">=</span><span class="n">connect_timeout</span><span class="p">,</span> <span class="n">sql_mode</span><span class="o">=</span><span class="n">sql_mode</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s2">&#34;user&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">user</span>
+        <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s2">&#34;passwd&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
+
+        <span class="c1"># We accept a path to a MySQL socket file or a host(:port) string</span>
+        <span class="k">if</span> <span class="s2">&#34;/&#34;</span> <span class="ow">in</span> <span class="n">host</span><span class="p">:</span>
+            <span class="n">args</span><span class="p">[</span><span class="s2">&#34;unix_socket&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">host</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">socket</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">pair</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&#34;:&#34;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">args</span><span class="p">[</span><span class="s2">&#34;host&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">args</span><span class="p">[</span><span class="s2">&#34;port&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">args</span><span class="p">[</span><span class="s2">&#34;host&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">host</span>
+                <span class="n">args</span><span class="p">[</span><span class="s2">&#34;port&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3306</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db_args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_use_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reconnect</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;Cannot connect to MySQL on </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span>
+                          <span class="n">exc_info</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Closes this database connection.&#34;&#34;&#34;</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&#34;_db&#34;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">reconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Closes the existing database connection and re-opens it.&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_db_args</span><span class="p">)</span><span class="c1"># MySQLdb.connect(**self._db_args)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">autocommit</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">iter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Returns an iterator for the given query and parameters.&#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_connected</span><span class="p">()</span>
+        <span class="c1"># cursor = MySQLdb.cursors.SSCursor(self._db)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">cursors</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">kwparameters</span><span class="p">)</span>
+            <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">Row</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">):</span>
+<span class="c1">#    &#34;&#34;&#34;Returns a row list for the given query and parameters.&#34;&#34;&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">kwparameters</span><span class="p">)</span>
+            <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">description</span><span class="p">]</span>
+            <span class="c1"># return [Row(zip(column_names, row)) for row in cursor]</span>
+            <span class="c1"># zip_longest is similar to zip, but longer lists and iterator lengths are benchmarks</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">Row</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="p">]</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Returns the (singular) row returned by the given query.
+</span><span class="s2">
+</span><span class="s2">        If the query has no results, returns None.  If it has
+</span><span class="s2">        more than one result, raises an exception.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;Multiple rows returned for Database.get() query&#34;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rows</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># rowcount is a more reasonable default return value than lastrowid,</span>
+    <span class="c1"># but for historical compatibility execute() must return lastrowid.</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Executes the given query, returning the lastrowid from the query.&#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_lastrowid</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">execute_lastrowid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Executes the given query, returning the lastrowid from the query.&#34;&#34;&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">kwparameters</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">execute_rowcount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="o">*</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="n">kwparameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Executes the given query, returning the rowcount from the query.&#34;&#34;&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">kwparameters</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">executemany</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Executes the given query against all the given param sequences.
+</span><span class="s2">
+</span><span class="s2">        We return the lastrowid from the query.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">executemany_lastrowid</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">executemany_lastrowid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Executes the given query against all the given param sequences.
+</span><span class="s2">
+</span><span class="s2">        We return the lastrowid from the query.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">executemany_rowcount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Executes the given query against all the given param sequences.
+</span><span class="s2">
+</span><span class="s2">        We return the rowcount from the query.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cursor</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">update</span> <span class="o">=</span> <span class="n">execute_rowcount</span>
+    <span class="n">updatemany</span> <span class="o">=</span> <span class="n">executemany_rowcount</span>
+
+    <span class="n">insert</span> <span class="o">=</span> <span class="n">execute_lastrowid</span>
+    <span class="n">insertmany</span> <span class="o">=</span> <span class="n">executemany_lastrowid</span>
+
+    <span class="k">def</span> <span class="nf">_ensure_connected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Mysql by default closes client connections that are idle for</span>
+        <span class="c1"># 8 hours, but the client library does not report this fact until</span>
+        <span class="c1"># you try to perform a query and it fails.  Protect against this</span>
+        <span class="c1"># case by preemptively closing and reopening the connection</span>
+        <span class="c1"># if it has been idle for too long (7 hours by default).</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_db</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_use_time</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_idle_time</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reconnect</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_use_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_connected</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_db</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">kwparameters</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">kwparameters</span> <span class="ow">or</span> <span class="n">parameters</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">OperationalError</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;Error connecting to MySQL on </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">raise</span>
+
+
+<span class="k">class</span> <span class="nc">Row</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>  
+    <span class="s2">&#34;&#34;&#34;A dict that allows for object-like property access syntax.&#34;&#34;&#34;</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1">#if MySQLdb is not None:</span>
+<span class="k">if</span> <span class="n">pymysql</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>  
+    <span class="c1"># Fix the access conversions to properly recognize unicode/binary</span>
+    <span class="c1"># FIELD_TYPE = MySQLdb.constants.FIELD_TYPE</span>
+    <span class="n">FIELD_TYPE</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connections</span><span class="o">.</span><span class="n">FIELD_TYPE</span> <span class="c1"># MySQLdb.constants.FIELD_TYPE</span>
+    <span class="n">FLAG</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">FLAG</span><span class="c1"># MySQLdb.constants.FLAG</span>
+    <span class="n">CONVERSIONS</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">pymysql</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">conversions</span><span class="p">)</span><span class="c1"># (MySQLdb.converters.conversions)</span>
+
+    <span class="n">field_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">FIELD_TYPE</span><span class="o">.</span><span class="n">BLOB</span><span class="p">,</span> <span class="n">FIELD_TYPE</span><span class="o">.</span><span class="n">STRING</span><span class="p">,</span> <span class="n">FIELD_TYPE</span><span class="o">.</span><span class="n">VAR_STRING</span><span class="p">]</span>
+    <span class="k">if</span> <span class="s1">&#39;VARCHAR&#39;</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">FIELD_TYPE</span><span class="p">):</span>
+        <span class="n">field_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">FIELD_TYPE</span><span class="o">.</span><span class="n">VARCHAR</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">field_type</span> <span class="ow">in</span> <span class="n">field_types</span><span class="p">:</span>
+        <span class="c1"># CONVERSIONS[field_type] = [(FLAG.BINARY, str)] + CONVERSIONS[field_type]</span>
+        <span class="n">CONVERSIONS</span><span class="p">[</span><span class="n">field_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="n">FLAG</span><span class="o">.</span><span class="n">BINARY</span><span class="p">,</span> <span class="nb">str</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">CONVERSIONS</span><span class="p">[</span><span class="n">field_type</span><span class="p">])</span>
+
+<span class="c1"># Alias some common MySQL exceptions</span>
+<span class="n">IntegrityError</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">IntegrityError</span> <span class="c1"># MySQLdb.IntegrityError  </span>
+<span class="n">OperationalError</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">OperationalError</span> <span class="c1"># MySQLdb.OperationalError</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-03
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/tornadosql/">tornadosql</a>
+          <a href="/tags/tornado/">tornado</a>
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">源码解读</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python异步IO之协程</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/">
+            <span class="next-text nav-default">发布自己的软件包到pypi</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

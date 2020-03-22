@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>多重继承和c3算法 - wxx&#39;s blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="oouxx" /><meta name="description" content="关于MRO 和 C3算法 有一个sina的blog介绍的很好：python多重继承MRO mro即method resolution order，主要用于在多继承时判断调" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.67.1 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="多重继承和c3算法" />
+<meta property="og:description" content="关于MRO 和 C3算法 有一个sina的blog介绍的很好：python多重继承MRO mro即method resolution order，主要用于在多继承时判断调" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/" />
+<meta property="article:published_time" content="2019-05-19T23:52:04+08:00" />
+<meta property="article:modified_time" content="2019-05-19T23:52:04+08:00" />
+<meta itemprop="name" content="多重继承和c3算法">
+<meta itemprop="description" content="关于MRO 和 C3算法 有一个sina的blog介绍的很好：python多重继承MRO mro即method resolution order，主要用于在多继承时判断调">
+<meta itemprop="datePublished" content="2019-05-19T23:52:04&#43;08:00" />
+<meta itemprop="dateModified" content="2019-05-19T23:52:04&#43;08:00" />
+<meta itemprop="wordCount" content="1373">
+
+
+
+<meta itemprop="keywords" content="Python,多重继承,C3算法," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="多重继承和c3算法"/>
+<meta name="twitter:description" content="关于MRO 和 C3算法 有一个sina的blog介绍的很好：python多重继承MRO mro即method resolution order，主要用于在多继承时判断调"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">wxx</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">wxx</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">多重继承和c3算法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-05-19 </span>
+        <div class="post-category">
+            <a href="/categories/python/"> Python </a>
+            </div>
+          <span class="more-meta"> 约 1373 字 </span>
+          <span class="more-meta"> 预计阅读 3 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>关于MRO 和 C3算法
+有一个sina的blog介绍的很好：<a href="http://blog.sina.com.cn/s/blog_45ac0d0a01018488.html">python多重继承MRO</a></p>
+<p>mro即method resolution order，主要用于在多继承时判断调的属性的路径(来自于哪个类)。之前查看了很多资料，说mro是基于深度优先搜索算法的。但不完全正确在Python2.3之前是基于此算法，但从Python2.3起应用了新算法:C3算法。</p>
+<p>为什么采用C3算法</p>
+<p>C3算法最早被提出是用于Lisp的，应用在Python中是为了解决原来基于深度优先搜索算法不满足本地优先级，和单调性的问题。
+本地优先级：指声明时父类的顺序，比如C(A,B)，如果访问C类对象属性时，应该根据声明顺序，优先查找A类，然后再查找B类。
+单调性：如果在C的解析顺序中，A排在B的前面，那么在C的所有子类里，也必须满足这个顺序。
+在Python官网的The Python 2.3 Method Resolution Order中作者举了例子，说明这一情况。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">F</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;Food&#39;</span><span class="p">,</span> <span class="p">(),</span> <span class="p">{</span><span class="n">remember2buy</span><span class="p">:</span><span class="s1">&#39;spam&#39;</span><span class="p">})</span>
+<span class="n">E</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;Eggs&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">F</span><span class="p">,),</span> <span class="p">{</span><span class="n">remember2buy</span><span class="p">:</span><span class="s1">&#39;eggs&#39;</span><span class="p">})</span>
+<span class="n">G</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="s1">&#39;GoodFood&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">E</span><span class="p">),</span> <span class="p">{})</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>根据本地优先级在调用G类对象属性时应该优先查找F类，而在Python2.3之前的算法给出的顺序是G E F O，而在心得C3算法中通过阻止类层次不清晰的声明来解决这一问题，以上声明在C3算法中就是非法的。
+C3算法
+判断mro要先确定一个线性序列，然后查找路径由由序列中类的顺序决定。所以C3算法就是生成一个线性序列。
+如果继承至一个基类:
+<code>class B(A)</code></p>
+<p>这时B的mro序列为[B,A]
+如果继承至多个基类
+<code>class B(A1,A2,A3 ...)</code></p>
+<p>这时B的mro序列
+<code>mro(B) = [B] + merge(mro(A1), mro(A2), mro(A3) ..., [A1,A2,A3])</code></p>
+<p>merge操作就是C3算法的核心。
+遍历执行merge操作的序列，如果一个序列的第一个元素，在其他序列中也是第一个元素，或不在其他序列出现，则从所有执行merge操作序列中删除这个元素，合并到当前的mro中。
+merge操作后的序列，继续执行merge操作，直到merge操作的序列为空。
+如果merge操作的序列无法为空，则说明不合法。
+例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">O</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">O</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">O</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">E</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">F</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">G</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="p">):</span><span class="k">pass</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>A、B、C都继承至一个基类，所以mro序列依次为[A,O]、[B,O]、[C,O]</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">mro</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">E</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">(</span><span class="n">mro</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">mro</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">])</span>
+       <span class="o">=</span> <span class="p">[</span><span class="n">E</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">A</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行merge操作的序列为[A,O]、[B,O]、[A,B]
+A是序列[A,O]中的第一个元素，在序列[B,O]中不出现，在序列[A,B]中也是第一个元素，所以从执行merge操作的序列([A,O]、[B,O]、[A,B])中删除A，合并到当前mro，[E]中。</p>
+<p><code>mro(E) = [E,A] + merge([O], [B,O], [B])</code></p>
+<p>再执行merge操作，O是序列[O]中的第一个元素，但O在序列[B,O]中出现并且不是其中第一个元素。继续查看[B,O]的第一个元素B，B满足条件，所以从执行merge操作的序列中删除B，合并到[E, A]中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">mro</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">O</span><span class="p">])</span>
+       <span class="o">=</span> <span class="p">[</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同理</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="n">mro</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">(</span><span class="n">mro</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="n">mro</span><span class="p">(</span><span class="n">C</span><span class="p">),</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">C</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">O</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">]</span>
+
+<span class="n">mro</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">(</span><span class="n">mro</span><span class="p">[</span><span class="n">E</span><span class="p">],</span> <span class="n">mro</span><span class="p">[</span><span class="n">F</span><span class="p">],</span> <span class="p">[</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">,</span><span class="n">E</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">F</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">F</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">B</span><span class="p">,</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">([</span><span class="n">O</span><span class="p">],</span> <span class="p">[</span><span class="n">O</span><span class="p">])</span>
+           <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="p">,</span><span class="n">E</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">O</span><span class="p">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>自己实现了一个mro算法:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">from</span> <span class="nn">exceptions</span> <span class="kn">import</span> <span class="ne">Exception</span>
+
+<span class="k">def</span> <span class="nf">c3_lineration</span><span class="p">(</span><span class="n">kls</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kls</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">kls</span><span class="p">,</span> <span class="n">kls</span><span class="o">.</span><span class="n">__base__</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">c3_lineration</span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">kls</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">]</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">base</span> <span class="k">for</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">kls</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">kls</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mro_list</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">class_type</span> <span class="ow">in</span> <span class="n">mro_list</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">comp_list</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">class_type</span> <span class="ow">in</span> <span class="n">comp_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">next_merge_list</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">class_type</span> <span class="ow">in</span> <span class="n">arg</span><span class="p">:</span>
+                            <span class="n">arg</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">class_type</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">arg</span><span class="p">:</span>
+                                <span class="n">next_merge_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">next_merge_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="p">[</span><span class="n">class_type</span><span class="p">]</span> <span class="o">+</span> <span class="n">merge</span><span class="p">(</span><span class="n">next_merge_list</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">E</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">F</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">C</span><span class="p">):</span><span class="k">pass</span>
+<span class="k">class</span> <span class="nc">G</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="n">F</span><span class="p">):</span><span class="k">pass</span>
+
+<span class="k">print</span> <span class="n">c3_lineration</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>当前，我在Python3.6下，如果想要查看继承顺序的话，更简单，每个类都有一个.mro()的方法。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">oouxx</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-05-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/python/">Python</a>
+          <a href="/tags/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF/">多重继承</a>
+          <a href="/tags/c3%E7%AE%97%E6%B3%95/">C3算法</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python%E9%97%AD%E5%8C%85/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python闭包</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/">
+            <span class="next-text nav-default">动态语言与鸭子类型</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'oouxx';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+      <a href="http://localhost:1313" class="iconfont icon-gitlab" title="gitlab"></a>
+      <a href="http://localhost:1313" class="iconfont icon-bilibili" title="bilibili"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2017 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">oouxx</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

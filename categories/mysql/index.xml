@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on wxx&#39;s blog</title>
+    <link>http://localhost:1313/categories/mysql/</link>
+    <description>Recent content in MySQL on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 15 Oct 2018 08:39:21 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/categories/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL安装问题</title>
+      <link>http://localhost:1313/post/mysql%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Mon, 15 Oct 2018 08:39:21 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/mysql%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</guid>
+      <description>运行环境 XUbuntu 18.04LTS MySQL 5.7 问题描述 运行了下面命令后 1 $ sudo apt-get install mysql-server mysql-client libmysqlclient-dev 无法登陆mysql。 解决办法 因为在安装过程中并未提示设置root密码，就想着查看一下</description>
+    </item>
+    
+  </channel>
+</rss>

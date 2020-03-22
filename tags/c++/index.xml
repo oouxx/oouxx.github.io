@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on wxx&#39;s blog</title>
+    <link>http://localhost:1313/tags/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on wxx&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 04 Dec 2018 10:25:50 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BF算法C&#43;&#43;版</title>
+      <link>http://localhost:1313/post/bruteforcealgoritmc&#43;&#43;ver/</link>
+      <pubDate>Tue, 04 Dec 2018 10:25:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/bruteforcealgoritmc&#43;&#43;ver/</guid>
+      <description>这是字符串暴力匹配算法的C_++版本 暴力匹配的思路:使用穷举的方法,目标串和模式串进行匹配,一旦失配,目标串指针(或者说数组索引值)回退到下</description>
+    </item>
+    
+    <item>
+      <title>KMP算法C&#43;&#43;版</title>
+      <link>http://localhost:1313/post/kmpalgorithmc&#43;&#43;ver/</link>
+      <pubDate>Tue, 04 Dec 2018 10:25:50 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/kmpalgorithmc&#43;&#43;ver/</guid>
+      <description>KMP算法C++版本 KMP算法基本思路:构造next[]减少回溯 next的构造 1 2 3 4 5 6 7 8 9 10 11 12 void GetNext(SqString t, int next[]){ int j,k; j=0;k=-1; next[0] = -1; while(j &amp;lt; t.length-1){ if(k==-1 || t.data[j]==t.data[k]){ j++;k++; next[i]=k;</description>
+    </item>
+    
+  </channel>
+</rss>
