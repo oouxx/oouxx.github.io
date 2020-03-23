@@ -1,0 +1,16 @@
+#+title: Using Org Mode in Hugo
+#+subtitle: emacs everywhere
+#+date: 2012-03-22
+#+tags[]: howto, emacs, hugo
+#+draft: true
+
+* 在 org 文件中插入 Python 代码  
+
+#+BEGIN_SRC python
+def main():
+    print("你好")
+#+END_SRC  
+  
+* 在 org 文件中插入 java 代码
+
+
