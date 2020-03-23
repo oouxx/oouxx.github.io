@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>前端 on wxx&#39;s blog</title>
-    <link>http://localhost:1313/categories/%E5%89%8D%E7%AB%AF/</link>
+    <link>http://oouxx.github.io/categories/%E5%89%8D%E7%AB%AF/</link>
     <description>Recent content in 前端 on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 03 Dec 2018 20:34:20 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/categories/%E5%89%8D%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>前端评论系统集成</title>
-      <link>http://localhost:1313/post/%E5%89%8D%E7%AB%AF%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</link>
+      <link>http://oouxx.github.io/post/%E5%89%8D%E7%AB%AF%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</link>
       <pubDate>Mon, 03 Dec 2018 20:34:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%89%8D%E7%AB%AF%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</guid>
+      <guid>http://oouxx.github.io/post/%E5%89%8D%E7%AB%AF%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</guid>
       <description>vue-disqus 项目地址,使用的是全球第二大评论系统disqus,我的个人博客用的也是这个评论系统,质量没的说很好,但是要梯子. vue-gitcomment 项目地址,这个评论系统是</description>
     </item>
     
     <item>
       <title>在vue中集成markdown</title>
-      <link>http://localhost:1313/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</link>
+      <link>http://oouxx.github.io/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</link>
       <pubDate>Fri, 30 Nov 2018 21:20:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</guid>
+      <guid>http://oouxx.github.io/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</guid>
       <description>为了在自己的vue中集成markdown真的试遍了所有的方法,终于成功了,特此发布博文记录一下. 我的失败经历 使用vue-markdown + highlightjs</description>
     </item>
     

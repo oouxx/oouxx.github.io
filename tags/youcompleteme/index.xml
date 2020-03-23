@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>YouCompleteMe on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/youcompleteme/</link>
+    <link>http://oouxx.github.io/tags/youcompleteme/</link>
     <description>Recent content in YouCompleteMe on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 17 Apr 2019 10:42:20 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/youcompleteme/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/youcompleteme/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>编译安装VIM8.0以及安装YouCompleteMe</title>
-      <link>http://localhost:1313/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/</link>
+      <link>http://oouxx.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/</link>
       <pubDate>Wed, 17 Apr 2019 10:42:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/</guid>
+      <guid>http://oouxx.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/</guid>
       <description>今天心血来潮想搞一搞VIM，然后就不停的Google&amp;hellip;&amp;hellip;，找各种教程，遇到了各种问题麻烦（心累并快乐着）&amp;hel</description>
     </item>
     

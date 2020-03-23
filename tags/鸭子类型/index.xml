@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>鸭子类型 on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
+    <link>http://oouxx.github.io/tags/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
     <description>Recent content in 鸭子类型 on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 19 May 2019 09:14:03 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>动态语言与鸭子类型</title>
-      <link>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
+      <link>http://oouxx.github.io/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Sun, 19 May 2019 09:14:03 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
+      <guid>http://oouxx.github.io/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</guid>
       <description>动态语言 今天来说说编程语言中的动态类型语言与鸭子类型，维基百科对动态语言的定义： 动态编程语言是一类在运行时可以改变其结构的语言：例如新的函数</description>
     </item>
     

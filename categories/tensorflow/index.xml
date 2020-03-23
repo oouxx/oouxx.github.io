@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tensorflow on wxx&#39;s blog</title>
-    <link>http://localhost:1313/categories/tensorflow/</link>
+    <link>http://oouxx.github.io/categories/tensorflow/</link>
     <description>Recent content in tensorflow on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 07 Dec 2018 17:43:30 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/categories/tensorflow/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>tensorflow的处理结构</title>
-      <link>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</link>
+      <link>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</link>
       <pubDate>Fri, 07 Dec 2018 17:43:30 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</guid>
+      <guid>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</guid>
       <description>处理结构 因为TensorFlow是采用数据流图（data flow graphs）来计算, 所以首先我们得创建一个数据流流图, 然后再将我 们的数据（数据以</description>
     </item>
     

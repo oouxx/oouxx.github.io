@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>协程 on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/%E5%8D%8F%E7%A8%8B/</link>
+    <link>http://oouxx.github.io/tags/%E5%8D%8F%E7%A8%8B/</link>
     <description>Recent content in 协程 on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 04 May 2019 06:04:04 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/%E5%8D%8F%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/%E5%8D%8F%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python异步IO之协程</title>
-      <link>http://localhost:1313/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</link>
+      <link>http://oouxx.github.io/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</link>
       <pubDate>Sat, 04 May 2019 06:04:04 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</guid>
+      <guid>http://oouxx.github.io/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</guid>
       <description>协程 协程，又称微线程，纤程。英文名Coroutine。 协程的概念很早就提出来了，但直到最近几年才在某些语言（如Lua）中得到广泛应用。 子程序</description>
     </item>
     

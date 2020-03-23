@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Secure Cookie on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/secure-cookie/</link>
+    <link>http://oouxx.github.io/tags/secure-cookie/</link>
     <description>Recent content in Secure Cookie on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 07 May 2019 02:21:39 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/secure-cookie/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/secure-cookie/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>tornado安全cookie</title>
-      <link>http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/</link>
+      <link>http://oouxx.github.io/post/tornado%E5%AE%89%E5%85%A8cookie/</link>
       <pubDate>Tue, 07 May 2019 02:21:39 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/</guid>
+      <guid>http://oouxx.github.io/post/tornado%E5%AE%89%E5%85%A8cookie/</guid>
       <description>tornado安全cookie 文章源代码过多，参照tornado源码看本文效果更佳 Secure Cookies Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornad</description>
     </item>
     

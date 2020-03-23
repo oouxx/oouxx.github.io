@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>源码解读 on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
+    <link>http://oouxx.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
     <description>Recent content in 源码解读 on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 08 May 2019 07:23:28 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>tornado.web.RequestHandler异常处理</title>
-      <link>http://localhost:1313/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link>
+      <link>http://oouxx.github.io/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</link>
       <pubDate>Wed, 08 May 2019 07:23:28 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid>
+      <guid>http://oouxx.github.io/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</guid>
       <description>tornado.web.RequestHandler异常处理 tornado异常处理要从_handle_request_execption开始</description>
     </item>
     
     <item>
       <title>tornado的XSRF防护</title>
-      <link>http://localhost:1313/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/</link>
+      <link>http://oouxx.github.io/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/</link>
       <pubDate>Wed, 08 May 2019 07:02:22 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/</guid>
+      <guid>http://oouxx.github.io/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/</guid>
       <description>XSRF XSRF（Cross-site request forgery，跨站请求伪造），也被简写为 CSRF，发音为”sea surf”，这是一个常见的安全漏洞（这里</description>
     </item>
     
     <item>
       <title>tornado安全cookie</title>
-      <link>http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/</link>
+      <link>http://oouxx.github.io/post/tornado%E5%AE%89%E5%85%A8cookie/</link>
       <pubDate>Tue, 07 May 2019 02:21:39 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/</guid>
+      <guid>http://oouxx.github.io/post/tornado%E5%AE%89%E5%85%A8cookie/</guid>
       <description>tornado安全cookie 文章源代码过多，参照tornado源码看本文效果更佳 Secure Cookies Cookies 是不安全的，可以被客户端轻易修改和伪造，Tornad</description>
     </item>
     
     <item>
       <title>鸟瞰tornado</title>
-      <link>http://localhost:1313/post/%E9%B8%9F%E7%9E%B0tornado/</link>
+      <link>http://oouxx.github.io/post/%E9%B8%9F%E7%9E%B0tornado/</link>
       <pubDate>Mon, 06 May 2019 02:17:48 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E9%B8%9F%E7%9E%B0tornado/</guid>
+      <guid>http://oouxx.github.io/post/%E9%B8%9F%E7%9E%B0tornado/</guid>
       <description>鸟瞰tornado Web framework tornado.web — RequestHandler and Application classes tornado.template — Flexible output generation tornado.routing — Basic routing implementation tornado.escape — Escaping and string manipulation tornado.locale — Internationalization support tornado.websocket — Bidirectional communication to the browser HTTP servers and clients tornado.httpserver — Non-blocking HTTP server tornado.httpclient — Asynchronous HTTP client tornado.httputil — Manipulate HTTP headers and URLs tornado.http1connection – HTTP/1.x client/server implementation</description>
     </item>
     
     <item>
       <title>tornadosql源码解读</title>
-      <link>http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
+      <link>http://oouxx.github.io/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
       <pubDate>Fri, 03 May 2019 19:28:03 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
+      <guid>http://oouxx.github.io/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
       <description>tornadosql源码解读 因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换</description>
     </item>
     

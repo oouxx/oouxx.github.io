@@ -1,1044 +1,1044 @@
-<?xml-stylesheet type="text/xsl" href="http://localhost:1313/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="http://oouxx.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://oouxx.github.io/categories/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>http://oouxx.github.io/post/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/python/</loc>
+    <loc>http://oouxx.github.io/tags/python/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/scrapy-redis%E9%87%8D%E5%A4%8D%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
+    <loc>http://oouxx.github.io/post/scrapy-redis%E9%87%8D%E5%A4%8D%E8%BF%87%E6%BB%A4%E5%99%A8%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://oouxx.github.io/tags/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://oouxx.github.io/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%9D%82%E8%B0%88/</loc>
+    <loc>http://oouxx.github.io/categories/%E6%9D%82%E8%B0%88/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E7%88%AC%E8%99%AB/</loc>
+    <loc>http://oouxx.github.io/tags/%E7%88%AC%E8%99%AB/</loc>
     <lastmod>2019-10-31T09:36:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/tools/</loc>
+    <loc>http://oouxx.github.io/tags/tools/</loc>
     <lastmod>2019-10-26T12:29:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/my-development-tools/</loc>
+    <loc>http://oouxx.github.io/post/my-development-tools/</loc>
     <lastmod>2019-10-26T12:29:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E6%9C%80%E5%B0%8F%E6%9D%83%E9%99%90%E5%8E%9F%E5%88%99/</loc>
+    <loc>http://oouxx.github.io/post/%E6%9C%80%E5%B0%8F%E6%9D%83%E9%99%90%E5%8E%9F%E5%88%99/</loc>
     <lastmod>2019-09-23T17:32:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/</loc>
+    <loc>http://oouxx.github.io/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8/</loc>
     <lastmod>2019-09-23T17:32:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/go/</loc>
+    <loc>http://oouxx.github.io/tags/go/</loc>
     <lastmod>2019-06-09T17:13:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/go/</loc>
+    <loc>http://oouxx.github.io/categories/go/</loc>
     <lastmod>2019-06-09T17:13:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/go%E5%88%87%E7%89%87%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84/</loc>
+    <loc>http://oouxx.github.io/post/go%E5%88%87%E7%89%87%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2019-06-09T17:13:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%88%87%E7%89%87/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%88%87%E7%89%87/</loc>
     <lastmod>2019-06-09T17:13:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/privoxy%E7%9C%9F%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/</loc>
+    <loc>http://oouxx.github.io/post/privoxy%E7%9C%9F%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2019-05-31T17:00:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E4%BB%A3%E7%90%86/</loc>
+    <loc>http://oouxx.github.io/tags/%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2019-05-31T17:00:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/docker/</loc>
+    <loc>http://oouxx.github.io/tags/docker/</loc>
     <lastmod>2019-05-26T09:44:07+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</loc>
+    <loc>http://oouxx.github.io/post/docker%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2019-05-26T09:44:07+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</loc>
+    <loc>http://oouxx.github.io/tags/io%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/</loc>
     <lastmod>2019-05-25T12:07:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/select-poll%E5%92%8Cepoll%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://oouxx.github.io/post/select-poll%E5%92%8Cepoll%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2019-05-25T12:07:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%AF%B9%E6%95%B0%E5%99%A8python%E7%89%88/</loc>
+    <loc>http://oouxx.github.io/post/%E5%AF%B9%E6%95%B0%E5%99%A8python%E7%89%88/</loc>
     <lastmod>2019-05-22T18:38:17+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/python/</loc>
+    <loc>http://oouxx.github.io/categories/python/</loc>
     <lastmod>2019-05-21T04:38:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D/</loc>
+    <loc>http://oouxx.github.io/post/python%E4%B8%AD%E7%9A%84%E6%8B%B7%E8%B4%9D/</loc>
     <lastmod>2019-05-21T04:38:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</loc>
+    <loc>http://oouxx.github.io/tags/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</loc>
     <lastmod>2019-05-21T04:38:01+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E9%97%AD%E5%8C%85/</loc>
+    <loc>http://oouxx.github.io/post/python%E9%97%AD%E5%8C%85/</loc>
     <lastmod>2019-05-21T01:22:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E9%97%AD%E5%8C%85/</loc>
+    <loc>http://oouxx.github.io/tags/%E9%97%AD%E5%8C%85/</loc>
     <lastmod>2019-05-21T01:22:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/c3%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://oouxx.github.io/tags/c3%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2019-05-19T23:52:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF/</loc>
     <lastmod>2019-05-19T23:52:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://oouxx.github.io/post/%E5%A4%9A%E9%87%8D%E7%BB%A7%E6%89%BF%E5%92%8Cc3%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2019-05-19T23:52:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
+    <loc>http://oouxx.github.io/post/%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80%E4%B8%8E%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2019-05-19T09:14:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
+    <loc>http://oouxx.github.io/tags/%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2019-05-19T09:14:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/</loc>
+    <loc>http://oouxx.github.io/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/</loc>
     <lastmod>2019-05-19T01:18:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</loc>
+    <loc>http://oouxx.github.io/tags/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2019-05-19T01:18:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</loc>
+    <loc>http://oouxx.github.io/post/%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2019-05-19T01:18:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/args%E5%92%8Ckwargs/</loc>
+    <loc>http://oouxx.github.io/post/args%E5%92%8Ckwargs/</loc>
     <lastmod>2019-05-18T19:11:58+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E7%94%9F%E6%88%90%E5%99%A8/</loc>
+    <loc>http://oouxx.github.io/tags/%E7%94%9F%E6%88%90%E5%99%A8/</loc>
     <lastmod>2019-05-18T19:02:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</loc>
+    <loc>http://oouxx.github.io/post/%E7%94%9F%E6%88%90%E5%99%A8%E5%92%8C%E8%BF%AD%E4%BB%A3%E5%99%A8/</loc>
     <lastmod>2019-05-18T19:02:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/</loc>
+    <loc>http://oouxx.github.io/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/</loc>
     <lastmod>2019-05-18T19:02:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E5%92%8C%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF/</loc>
+    <loc>http://oouxx.github.io/post/python%E4%B8%AD%E7%9A%84%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E5%92%8C%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF/</loc>
     <lastmod>2019-05-18T18:36:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/python%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D/</loc>
+    <loc>http://oouxx.github.io/tags/python%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D/</loc>
     <lastmod>2019-05-18T18:36:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95/</loc>
+    <loc>http://oouxx.github.io/tags/%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2019-05-18T18:02:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95/</loc>
+    <loc>http://oouxx.github.io/post/%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E7%B1%BB%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2019-05-18T18:02:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</loc>
+    <loc>http://oouxx.github.io/post/python%E4%B8%AD%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</loc>
     <lastmod>2019-05-17T23:47:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92/</loc>
     <lastmod>2019-05-17T23:47:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/tornado/</loc>
+    <loc>http://oouxx.github.io/tags/tornado/</loc>
     <lastmod>2019-05-08T07:23:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</loc>
+    <loc>http://oouxx.github.io/post/tornado-web-requesthandler%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</loc>
     <lastmod>2019-05-08T07:23:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</loc>
+    <loc>http://oouxx.github.io/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</loc>
     <lastmod>2019-05-08T07:23:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</loc>
+    <loc>http://oouxx.github.io/categories/%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</loc>
     <lastmod>2019-05-08T07:23:28+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/</loc>
+    <loc>http://oouxx.github.io/post/tornado%E7%9A%84xsrf%E9%98%B2%E6%8A%A4/</loc>
     <lastmod>2019-05-08T07:02:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/xsrf/</loc>
+    <loc>http://oouxx.github.io/tags/xsrf/</loc>
     <lastmod>2019-05-08T07:02:22+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/secure-cookie/</loc>
+    <loc>http://oouxx.github.io/tags/secure-cookie/</loc>
     <lastmod>2019-05-07T02:21:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/tornado%E5%AE%89%E5%85%A8cookie/</loc>
+    <loc>http://oouxx.github.io/post/tornado%E5%AE%89%E5%85%A8cookie/</loc>
     <lastmod>2019-05-07T02:21:39+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/</loc>
+    <loc>http://oouxx.github.io/post/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/</loc>
     <lastmod>2019-05-06T06:56:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://oouxx.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2019-05-06T06:56:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/process-fork-process%E5%89%96%E6%9E%90tornado%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%8E%9F%E7%90%86/</loc>
+    <loc>http://oouxx.github.io/post/process-fork-process%E5%89%96%E6%9E%90tornado%E5%A4%9A%E8%BF%9B%E7%A8%8B%E5%8E%9F%E7%90%86/</loc>
     <lastmod>2019-05-06T05:13:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E9%B8%9F%E7%9E%B0tornado/</loc>
+    <loc>http://oouxx.github.io/post/%E9%B8%9F%E7%9E%B0tornado/</loc>
     <lastmod>2019-05-06T02:17:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</loc>
+    <loc>http://oouxx.github.io/post/python%E5%BC%82%E6%AD%A5io%E4%B9%8B%E5%8D%8F%E7%A8%8B/</loc>
     <lastmod>2019-05-04T06:04:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%8D%8F%E7%A8%8B/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%8D%8F%E7%A8%8B/</loc>
     <lastmod>2019-05-04T06:04:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%BC%82%E6%AD%A5io/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%BC%82%E6%AD%A5io/</loc>
     <lastmod>2019-05-04T06:04:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/tornadosql/</loc>
+    <loc>http://oouxx.github.io/tags/tornadosql/</loc>
     <lastmod>2019-05-03T19:28:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</loc>
+    <loc>http://oouxx.github.io/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</loc>
     <lastmod>2019-05-03T19:28:03+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/</loc>
+    <loc>http://oouxx.github.io/post/%E5%8F%91%E5%B8%83%E8%87%AA%E5%B7%B1%E7%9A%84%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%88%B0pypi/</loc>
     <lastmod>2019-04-24T01:48:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/epoll/</loc>
+    <loc>http://oouxx.github.io/tags/epoll/</loc>
     <lastmod>2019-04-17T15:17:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/epoll%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</loc>
+    <loc>http://oouxx.github.io/post/epoll%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</loc>
     <lastmod>2019-04-17T15:17:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/linux/</loc>
+    <loc>http://oouxx.github.io/tags/linux/</loc>
     <lastmod>2019-04-17T15:17:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/linux/</loc>
+    <loc>http://oouxx.github.io/categories/linux/</loc>
     <lastmod>2019-04-17T15:17:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/github/</loc>
+    <loc>http://oouxx.github.io/tags/github/</loc>
     <lastmod>2019-04-17T10:49:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E4%BF%AE%E6%AD%A3github%E8%87%AA%E5%8A%A8%E8%AF%86%E5%88%AB%E9%A1%B9%E7%9B%AE%E8%AF%AD%E8%A8%80%E9%94%99%E8%AF%AF/</loc>
+    <loc>http://oouxx.github.io/post/%E4%BF%AE%E6%AD%A3github%E8%87%AA%E5%8A%A8%E8%AF%86%E5%88%AB%E9%A1%B9%E7%9B%AE%E8%AF%AD%E8%A8%80%E9%94%99%E8%AF%AF/</loc>
     <lastmod>2019-04-17T10:49:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%88%A0%E9%99%A4%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91%E7%9A%84%E8%BD%AF%E4%BB%B6/</loc>
+    <loc>http://oouxx.github.io/post/%E5%88%A0%E9%99%A4%E8%87%AA%E5%B7%B1%E7%BC%96%E8%AF%91%E7%9A%84%E8%BD%AF%E4%BB%B6/</loc>
     <lastmod>2019-04-17T10:47:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E7%BC%96%E8%AF%91/</loc>
+    <loc>http://oouxx.github.io/tags/%E7%BC%96%E8%AF%91/</loc>
     <lastmod>2019-04-17T10:47:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/</loc>
+    <loc>http://oouxx.github.io/post/python%E4%B8%AD%E7%9A%84%E9%99%A4%E6%B3%95/</loc>
     <lastmod>2019-04-17T10:44:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E9%99%A4%E6%B3%95/</loc>
+    <loc>http://oouxx.github.io/tags/%E9%99%A4%E6%B3%95/</loc>
     <lastmod>2019-04-17T10:44:49+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/vim/</loc>
+    <loc>http://oouxx.github.io/tags/vim/</loc>
     <lastmod>2019-04-17T10:42:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/vim/</loc>
+    <loc>http://oouxx.github.io/categories/vim/</loc>
     <lastmod>2019-04-17T10:42:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/youcompleteme/</loc>
+    <loc>http://oouxx.github.io/tags/youcompleteme/</loc>
     <lastmod>2019-04-17T10:42:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/</loc>
+    <loc>http://oouxx.github.io/post/%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85vim8-0%E4%BB%A5%E5%8F%8A%E5%AE%89%E8%A3%85youcompleteme/</loc>
     <lastmod>2019-04-17T10:42:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/windows/</loc>
+    <loc>http://oouxx.github.io/tags/windows/</loc>
     <lastmod>2019-04-17T10:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/windows/</loc>
+    <loc>http://oouxx.github.io/categories/windows/</loc>
     <lastmod>2019-04-17T10:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/windows%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/</loc>
+    <loc>http://oouxx.github.io/post/windows%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/</loc>
     <lastmod>2019-04-17T10:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%BC%95%E5%AF%BC%E4%BF%AE%E5%A4%8D/</loc>
     <lastmod>2019-04-17T10:40:02+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/pipenv/</loc>
+    <loc>http://oouxx.github.io/tags/pipenv/</loc>
     <lastmod>2019-04-11T02:25:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</loc>
+    <loc>http://oouxx.github.io/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2019-04-11T02:25:44+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/hexo/</loc>
+    <loc>http://oouxx.github.io/tags/hexo/</loc>
     <lastmod>2019-04-02T05:30:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD/</loc>
+    <loc>http://oouxx.github.io/post/hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD/</loc>
     <lastmod>2019-04-02T05:30:34+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/vimer%E7%9A%84%E7%A6%8F%E5%88%A9vimium/</loc>
+    <loc>http://oouxx.github.io/post/vimer%E7%9A%84%E7%A6%8F%E5%88%A9vimium/</loc>
     <lastmod>2018-12-13T14:37:15+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/django/</loc>
+    <loc>http://oouxx.github.io/tags/django/</loc>
     <lastmod>2018-12-12T12:47:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/django/</loc>
+    <loc>http://oouxx.github.io/categories/django/</loc>
     <lastmod>2018-12-12T12:47:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/django%E4%B8%ADurlconf%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/</loc>
+    <loc>http://oouxx.github.io/post/django%E4%B8%ADurlconf%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/</loc>
     <lastmod>2018-12-12T12:47:56+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%9A%8F%E6%83%B3/</loc>
+    <loc>http://oouxx.github.io/post/%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%9A%8F%E6%83%B3/</loc>
     <lastmod>2018-12-12T11:45:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E9%9A%8F%E6%83%B3/</loc>
+    <loc>http://oouxx.github.io/tags/%E9%9A%8F%E6%83%B3/</loc>
     <lastmod>2018-12-12T11:45:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E9%9A%8F%E6%83%B3/</loc>
+    <loc>http://oouxx.github.io/categories/%E9%9A%8F%E6%83%B3/</loc>
     <lastmod>2018-12-12T11:45:09+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/tensorflow/</loc>
+    <loc>http://oouxx.github.io/tags/tensorflow/</loc>
     <lastmod>2018-12-07T17:43:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/tensorflow/</loc>
+    <loc>http://oouxx.github.io/categories/tensorflow/</loc>
     <lastmod>2018-12-07T17:43:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</loc>
+    <loc>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</loc>
     <lastmod>2018-12-07T17:43:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>http://oouxx.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2018-12-07T17:43:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>http://oouxx.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2018-12-07T17:43:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/numpy/</loc>
+    <loc>http://oouxx.github.io/tags/numpy/</loc>
     <lastmod>2018-12-07T14:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/numpy/</loc>
+    <loc>http://oouxx.github.io/categories/numpy/</loc>
     <lastmod>2018-12-07T14:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%85%B3%E4%BA%8Enumpy-newaxis%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</loc>
+    <loc>http://oouxx.github.io/post/%E5%85%B3%E4%BA%8Enumpy-newaxis%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</loc>
     <lastmod>2018-12-07T14:40:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/matplotlib/</loc>
+    <loc>http://oouxx.github.io/tags/matplotlib/</loc>
     <lastmod>2018-12-05T21:14:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/matplotlib/</loc>
+    <loc>http://oouxx.github.io/categories/matplotlib/</loc>
     <lastmod>2018-12-05T21:14:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bmatplotlib%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bmatplotlib%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2018-12-05T21:14:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
+    <loc>http://oouxx.github.io/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</loc>
     <lastmod>2018-12-05T21:14:31+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/pandas/</loc>
+    <loc>http://oouxx.github.io/tags/pandas/</loc>
     <lastmod>2018-12-04T22:28:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/pandas/</loc>
+    <loc>http://oouxx.github.io/categories/pandas/</loc>
     <lastmod>2018-12-04T22:28:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2018-12-04T22:28:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2018-12-04T21:59:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/algorithm/</loc>
+    <loc>http://oouxx.github.io/tags/algorithm/</loc>
     <lastmod>2018-12-04T10:25:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/bruteforcealgoritmc&#43;&#43;ver/</loc>
+    <loc>http://oouxx.github.io/post/bruteforcealgoritmc&#43;&#43;ver/</loc>
     <lastmod>2018-12-04T10:25:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/c&#43;&#43;/</loc>
+    <loc>http://oouxx.github.io/tags/c&#43;&#43;/</loc>
     <lastmod>2018-12-04T10:25:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/c&#43;&#43;/</loc>
+    <loc>http://oouxx.github.io/categories/c&#43;&#43;/</loc>
     <lastmod>2018-12-04T10:25:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/kmpalgorithmc&#43;&#43;ver/</loc>
+    <loc>http://oouxx.github.io/post/kmpalgorithmc&#43;&#43;ver/</loc>
     <lastmod>2018-12-04T10:25:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/</loc>
     <lastmod>2018-12-04T10:25:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/vue/</loc>
+    <loc>http://oouxx.github.io/tags/vue/</loc>
     <lastmod>2018-12-03T20:34:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/vue/</loc>
+    <loc>http://oouxx.github.io/categories/vue/</loc>
     <lastmod>2018-12-03T20:34:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E5%89%8D%E7%AB%AF/</loc>
+    <loc>http://oouxx.github.io/tags/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2018-12-03T20:34:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/%E5%89%8D%E7%AB%AF/</loc>
+    <loc>http://oouxx.github.io/categories/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2018-12-03T20:34:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%89%8D%E7%AB%AF%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</loc>
+    <loc>http://oouxx.github.io/post/%E5%89%8D%E7%AB%AF%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E9%9B%86%E6%88%90/</loc>
     <lastmod>2018-12-03T20:34:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>http://oouxx.github.io/tags/%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2018-12-03T20:34:20+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/debug/</loc>
+    <loc>http://oouxx.github.io/tags/debug/</loc>
     <lastmod>2018-12-02T17:10:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/pdb%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4/</loc>
+    <loc>http://oouxx.github.io/post/pdb%E8%B0%83%E8%AF%95%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2018-12-02T17:10:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/algorithm/</loc>
+    <loc>http://oouxx.github.io/categories/algorithm/</loc>
     <lastmod>2018-12-01T18:34:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/java/</loc>
+    <loc>http://oouxx.github.io/tags/java/</loc>
     <lastmod>2018-12-01T18:34:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/java/</loc>
+    <loc>http://oouxx.github.io/categories/java/</loc>
     <lastmod>2018-12-01T18:34:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8Fjava%E7%89%88%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</loc>
+    <loc>http://oouxx.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8Fjava%E7%89%88%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</loc>
     <lastmod>2018-12-01T18:34:38+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/markdown/</loc>
+    <loc>http://oouxx.github.io/tags/markdown/</loc>
     <lastmod>2018-11-30T21:20:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</loc>
+    <loc>http://oouxx.github.io/post/%E5%9C%A8vue%E4%B8%AD%E9%9B%86%E6%88%90markdown/</loc>
     <lastmod>2018-11-30T21:20:33+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/leetcode/</loc>
+    <loc>http://oouxx.github.io/categories/leetcode/</loc>
     <lastmod>2018-11-23T20:08:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-addtwonumbers/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-addtwonumbers/</loc>
     <lastmod>2018-11-23T20:08:55+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-romamtointeger/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-romamtointeger/</loc>
     <lastmod>2018-11-22T16:13:24+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode-threesum/</loc>
+    <loc>http://oouxx.github.io/post/leetcode-threesum/</loc>
     <lastmod>2018-11-17T18:38:54+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/python%E7%9A%84bunch%E6%A8%A1%E5%BC%8F/</loc>
+    <loc>http://oouxx.github.io/post/python%E7%9A%84bunch%E6%A8%A1%E5%BC%8F/</loc>
     <lastmod>2018-10-30T21:41:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-longestcommonprefix-%E7%BB%AD/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-longestcommonprefix-%E7%BB%AD/</loc>
     <lastmod>2018-10-26T21:36:42+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-longestcommonprefix/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-longestcommonprefix/</loc>
     <lastmod>2018-10-25T15:49:35+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-reverseinteger-%E7%BB%AD/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-reverseinteger-%E7%BB%AD/</loc>
     <lastmod>2018-10-24T08:30:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-reverseinteger/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-reverseinteger/</loc>
     <lastmod>2018-10-23T22:10:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-twosum/</loc>
+    <loc>http://oouxx.github.io/post/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0-twosum/</loc>
     <lastmod>2018-10-22T09:23:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</loc>
+    <loc>http://oouxx.github.io/tags/%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</loc>
     <lastmod>2018-10-21T15:48:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/</loc>
+    <loc>http://oouxx.github.io/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/</loc>
     <lastmod>2018-10-21T15:48:05+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/json/</loc>
+    <loc>http://oouxx.github.io/tags/json/</loc>
     <lastmod>2018-10-19T20:58:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/json-dumps%E4%B8%AD%E7%9A%84ensure-ascii%E5%8F%82%E6%95%B0/</loc>
+    <loc>http://oouxx.github.io/post/json-dumps%E4%B8%AD%E7%9A%84ensure-ascii%E5%8F%82%E6%95%B0/</loc>
     <lastmod>2018-10-19T20:58:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/django%E5%A4%A9%E5%9D%91%E6%80%BB%E7%BB%93%E4%B8%80/</loc>
+    <loc>http://oouxx.github.io/post/django%E5%A4%A9%E5%9D%91%E6%80%BB%E7%BB%93%E4%B8%80/</loc>
     <lastmod>2018-10-18T22:39:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/%E7%90%86%E8%A7%A3utf-8/</loc>
+    <loc>http://oouxx.github.io/post/%E7%90%86%E8%A7%A3utf-8/</loc>
     <lastmod>2018-10-15T11:11:13+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/mysql/</loc>
+    <loc>http://oouxx.github.io/tags/mysql/</loc>
     <lastmod>2018-10-15T08:39:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/mysql/</loc>
+    <loc>http://oouxx.github.io/categories/mysql/</loc>
     <lastmod>2018-10-15T08:39:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/mysql%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</loc>
+    <loc>http://oouxx.github.io/post/mysql%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2018-10-15T08:39:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/git%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://oouxx.github.io/post/git%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2018-10-13T11:36:48+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

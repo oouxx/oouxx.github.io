@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pipenv on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/pipenv/</link>
+    <link>http://oouxx.github.io/tags/pipenv/</link>
     <description>Recent content in pipenv on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 11 Apr 2019 02:25:44 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/pipenv/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/pipenv/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>pipenv虚拟环境工具详细教程</title>
-      <link>http://localhost:1313/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</link>
+      <link>http://oouxx.github.io/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</link>
       <pubDate>Thu, 11 Apr 2019 02:25:44 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</guid>
+      <guid>http://oouxx.github.io/post/pipenv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B7%A5%E5%85%B7%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/</guid>
       <description>pipenv是requests库作者Kenneth Reitz编写的一个用于创建和管理Python虚拟环境的工具。 Pipenv是Python官</description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tools on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/tools/</link>
+    <link>http://oouxx.github.io/tags/tools/</link>
     <description>Recent content in tools on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 26 Oct 2019 12:29:45 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>我的工作空间</title>
-      <link>http://localhost:1313/post/my-development-tools/</link>
+      <link>http://oouxx.github.io/post/my-development-tools/</link>
       <pubDate>Sat, 26 Oct 2019 12:29:45 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/my-development-tools/</guid>
+      <guid>http://oouxx.github.io/post/my-development-tools/</guid>
       <description>我的开发工具 Windows平台 Cmder VIM VSCode Idea quick look(类似于mac的空格预览) libtary(类似mac的启动器) AutoHotKey(键盘映射</description>
     </item>
     

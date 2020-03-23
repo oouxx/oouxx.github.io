@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>hexo on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/hexo/</link>
+    <link>http://oouxx.github.io/tags/hexo/</link>
     <description>Recent content in hexo on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 02 Apr 2019 05:30:34 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>hexo博客创建以及备份</title>
-      <link>http://localhost:1313/post/hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD/</link>
+      <link>http://oouxx.github.io/post/hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD/</link>
       <pubDate>Tue, 02 Apr 2019 05:30:34 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD/</guid>
+      <guid>http://oouxx.github.io/post/hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E4%BB%A5%E5%8F%8A%E5%A4%87%E4%BB%BD/</guid>
       <description>hexo博客创建以及备份 首先确保本地环境已经安装node。 创建 环境安装 1 2 3 npm -g install hexo-cli npm -g install hexo-deployer-git npm install 初始化博客 1 hexo init myblog 修改配置文件 1 2 cd myblog vim _config.yml #</description>
     </item>
     

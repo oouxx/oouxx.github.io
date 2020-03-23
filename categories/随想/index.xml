@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>随想 on wxx&#39;s blog</title>
-    <link>http://localhost:1313/categories/%E9%9A%8F%E6%83%B3/</link>
+    <link>http://oouxx.github.io/categories/%E9%9A%8F%E6%83%B3/</link>
     <description>Recent content in 随想 on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 12 Dec 2018 11:45:09 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/categories/%E9%9A%8F%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/categories/%E9%9A%8F%E6%83%B3/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>作为一个准程序员的随想</title>
-      <link>http://localhost:1313/post/%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%9A%8F%E6%83%B3/</link>
+      <link>http://oouxx.github.io/post/%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%9A%8F%E6%83%B3/</link>
       <pubDate>Wed, 12 Dec 2018 11:45:09 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%9A%8F%E6%83%B3/</guid>
+      <guid>http://oouxx.github.io/post/%E4%BD%9C%E4%B8%BA%E4%B8%80%E4%B8%AA%E5%87%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E9%9A%8F%E6%83%B3/</guid>
       <description>作为一个准程序员的随想 学好英文 当在初学一门技术时,有中文文档还是要看中文,哪怕老旧一点,英文文档进阶的时候看的 遇到bug不要钻牛角尖,有些东</description>
     </item>
     

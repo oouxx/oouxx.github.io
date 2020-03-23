@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>机器学习 on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+    <link>http://oouxx.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
     <description>Recent content in 机器学习 on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 07 Dec 2018 17:43:30 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>tensorflow的处理结构</title>
-      <link>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</link>
+      <link>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</link>
       <pubDate>Fri, 07 Dec 2018 17:43:30 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</guid>
+      <guid>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Btensorflow/</guid>
       <description>处理结构 因为TensorFlow是采用数据流图（data flow graphs）来计算, 所以首先我们得创建一个数据流流图, 然后再将我 们的数据（数据以</description>
     </item>
     
     <item>
       <title>关于numpy.newaxis的一点理解</title>
-      <link>http://localhost:1313/post/%E5%85%B3%E4%BA%8Enumpy-newaxis%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</link>
+      <link>http://oouxx.github.io/post/%E5%85%B3%E4%BA%8Enumpy-newaxis%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</link>
       <pubDate>Fri, 07 Dec 2018 14:40:18 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%85%B3%E4%BA%8Enumpy-newaxis%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</guid>
+      <guid>http://oouxx.github.io/post/%E5%85%B3%E4%BA%8Enumpy-newaxis%E7%9A%84%E4%B8%80%E7%82%B9%E7%90%86%E8%A7%A3/</guid>
       <description>以下结果均在解释器下验证成功 通过查看源码和解释器验证发现np.newaxis是通过None实现的 1 2 3 4 5 &amp;gt;&amp;gt;&amp;gt; import numpy as np &amp;gt;&amp;gt;&amp;gt; type(np.newaxis) &amp;lt;class &amp;#39;NoneType&amp;#39;&amp;gt; &amp;gt;&amp;gt;&amp;gt; np.newaxis == None True 在理解</description>
     </item>
     
     <item>
       <title>pandas学习笔记</title>
-      <link>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 04 Dec 2018 22:28:43 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bpandas%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>pandas与numpy的区别 pandas是基于numpy构建的,使得numpy为中心的应用变得更加简单,两个主要的数据结构:Series和</description>
     </item>
     
     <item>
       <title>numpy学习笔记</title>
-      <link>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
+      <link>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 04 Dec 2018 21:59:55 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://oouxx.github.io/post/%E5%91%A8%E8%8E%AB%E7%83%A6%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</guid>
       <description>numpy介绍 NumPy是使用Python进行科学计算的基础包。它包含其他内容： 一个强大的N维数组对象 复杂的（广播）功能 用于集成C / C ++和</description>
     </item>
     

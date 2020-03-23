@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/java/</link>
+    <link>http://oouxx.github.io/tags/java/</link>
     <description>Recent content in Java on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sat, 01 Dec 2018 18:34:38 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>快速排序Java版简单示例.md</title>
-      <link>http://localhost:1313/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8Fjava%E7%89%88%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</link>
+      <link>http://oouxx.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8Fjava%E7%89%88%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</link>
       <pubDate>Sat, 01 Dec 2018 18:34:38 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8Fjava%E7%89%88%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</guid>
+      <guid>http://oouxx.github.io/post/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8Fjava%E7%89%88%E7%AE%80%E5%8D%95%E7%A4%BA%E4%BE%8B/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 import java.util.Scanner; public class Main{ public static void main(String[] args){ Scanner sc = new Scanner(System.in); int n = sc.nextInt(); int[] array = new int[n]; for(int i=0;i&amp;lt;n;i++){ array[i] = sc.nextInt();</description>
     </item>
     
     <item>
       <title>彩票下注程序</title>
-      <link>http://localhost:1313/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://oouxx.github.io/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Sun, 21 Oct 2018 15:48:05 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://oouxx.github.io/post/%E5%BD%A9%E7%A5%A8%E4%B8%8B%E6%B3%A8%E7%A8%8B%E5%BA%8F/</guid>
       <description>问题背景 Java实验课作业 问题描述 实现一个彩票游戏，要求允许用户输入下注的注数，每注七个不重复的号码并在1～35之间选取，最后输出要按照顺序</description>
     </item>
     

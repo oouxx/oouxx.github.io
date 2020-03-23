@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tornadosql on wxx&#39;s blog</title>
-    <link>http://localhost:1313/tags/tornadosql/</link>
+    <link>http://oouxx.github.io/tags/tornadosql/</link>
     <description>Recent content in tornadosql on wxx&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 03 May 2019 19:28:03 +0800</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/tags/tornadosql/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://oouxx.github.io/tags/tornadosql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>tornadosql源码解读</title>
-      <link>http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
+      <link>http://oouxx.github.io/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</link>
       <pubDate>Fri, 03 May 2019 19:28:03 +0800</pubDate>
       
-      <guid>http://localhost:1313/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
+      <guid>http://oouxx.github.io/post/tornadosql%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/</guid>
       <description>tornadosql源码解读 因为MySQLdb不支持Python3，并且Python2将于2020.1.1停止维护，所以将MySQLdb替换</description>
     </item>
     
